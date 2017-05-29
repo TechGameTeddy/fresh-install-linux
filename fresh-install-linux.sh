@@ -177,9 +177,9 @@ pause(){
 M_button(){
 	while true; do
     read mM
-case $M_button in
+case $input in
     [mM])
-		showmenus
+		show_menus
 #back to main menu
 backtomain(){
   show_menus
@@ -188,8 +188,8 @@ backtomain(){
 # function to display menus
 show_menus() {
 	clear
-	echo   "|~~~~~~~~~~~~~~~~~~~~~---------------------------------------------|"
-	echo   "|~~~~~~~~~~~~~~~~~~~~~---------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
 	echo   "|                                                                  |" 
 	echo   "| ######## ########  ########  ######  ##     ##                   |"
 	echo   "| ##       ##     ## ##       ##    ## ##     ##                   |"
@@ -210,8 +210,8 @@ show_menus() {
 	echo   "| the latest version of Ubuntu                                     |"
 	echo   "| created By @TechGameTeddy                                        |"
 	echo   "|                                                                  |"
-	echo   "| ~~~~~~~~~~~~~~~~~~~~~--------------------------------------------|"
-	echo   "| ~~~~~~~~~~~~~~~~~~~~~--------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
 	echo   "|1. Run unattended installer                                       |"
 	echo   "|2. Install Dependancies                                           |"
 	echo   "|3. Check Software List                                            |"
@@ -222,12 +222,12 @@ show_menus() {
 
 }
 software_list() {
-	write_header " Package List open-vm-tools-desktop
-"
+	write_header " Package List "
+
 	clear
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"	
+	echo "-----------------------------------------------------|"	
 	echo " Essential Tools to install post installing Ubuntu   |" 
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"
+	echo "-----------------------------------------------------|"
 	echo "                                                     |"
 	echo "1. Android Device Manager                            |" 
 	echo "2. Chromium                                          |"
@@ -248,17 +248,17 @@ software_list() {
 	echo "17.Ubuntu System Cleaner                             |"
 	echo "18.Unity Tweak Tool                                  |"
 	echo "19.Visual Studio Code                                |"
-	echo "20.Virtual Box                                      |"
+	echo "20.Virtual Box                                       |"
 	echo "                                                     |"
 	echo "      type learn# to learn more about each item      |"  
 	echo "       or press M to go back to the main menu        |"
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"
+	echo "-----------------------------------------------------|"
 
 }
 contributors() {
 	write_header " Contributors "
 	clear
-	echo "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"
+	echo "|------------------------------------------------------------------|"
 	echo "|      ~~|~~|  |  /\  |\  || /  \   //~~\ |   |                    |"
 	echo "|        |  |--| /__\ | \ ||(    \ /|    ||   |                    |"
 	echo "|        |  |  |/    \|  \|| \    |  \__/  \_/                     |"
@@ -271,7 +271,7 @@ contributors() {
 	echo "|  3.Someone else not as great as you                              |"
 	echo "|                                                                  |"
 	echo "|  Send all contribution request via Twitter to @TechGameTeddy     |"
-	echo "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"
+	echo "|------------------------------------------------------------------|"
 	pause
 }
 # ----------------------------------
@@ -347,3 +347,4 @@ do
 	read_options
 
 done
+
