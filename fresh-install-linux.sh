@@ -175,11 +175,8 @@ pause(){
 }
 # Press M to return
 M_button(){
-	while true; do
-    read mM
-case $input in
-    [mM])
-		show_menus
+  show_menus
+}
 #back to main menu
 backtomain(){
   show_menus
@@ -218,7 +215,7 @@ show_menus() {
 	echo   "|4. Contribute                                                     |"
 	echo   "|5. Exit                                                           |" 
 	echo   "|                                                                  |"
-	echo   "| ~~~~~~~~~~~~~~~~~~~~~--------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
 
 }
 software_list() {
@@ -241,7 +238,7 @@ software_list() {
 	echo "10.Putty                                             |"
 	echo "11.Shutter                                           |"
 	echo "12.Spaceview                                         |"
-	echo "13.Steam                                             |"
+	echo "13.Steam                                             |"  
 	echo "14.Synaptic Package Manager                          |"
 	echo "15.Tor                                               |"
 	echo "16.Transmission                                      |"
@@ -281,13 +278,12 @@ contributors() {
 ## Option one Unattended installer ()
 one(){
 	while true; do
-    read -p "Are you sure you want to run the unattended installer?" input
-case $input in
-    [yY][eE][sS]|[yY])
+	read -p "Are you sure you want to run the unattended installer?" input
+	case $input in
+	[yY][eE][sS]|[yY])
 		uinstaller
-		;;
- 
-    [nN][oO]|[nN])
+		;; 
+	[nN][oO]|[nN])
 		backtomain
 		break
        		;;
