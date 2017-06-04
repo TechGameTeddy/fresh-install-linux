@@ -175,11 +175,8 @@ pause(){
 }
 # Press M to return
 M_button(){
-	while true; do
-    read mM
-case $M_button in
-    [mM])
-		showmenus
+  showmenus
+}
 #back to main menu
 backtomain(){
   show_menus
