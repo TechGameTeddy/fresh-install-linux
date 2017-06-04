@@ -12,8 +12,12 @@
 STARTOFSCRIPT='date'
 ALLPPA="AllPPA"
 INSTALL="sudo apt-get install"
-ADDPPA="sudo add-apt-repository"
+ADDPPA="sudo add-apt-repository "
+ALLPPA= echo "all ppa's installed"
+
+#ALLPPA="ppa:graphics-drivers/ppa ppa:dawidd0811/neofetch ppa:vlijm/spaceview ppa:gerardpuig/ppa ppa:shutter/ppa ppa:atareao/atareao ppa:webupd8team/sublime-text-3"
 SEARCH="apt-cache search"
+UPDATE="sudo apt-get udpate"
 
 # Variables to install all available ppa's 
 nvidia="ppa:graphics-drivers/ppa" 
@@ -25,6 +29,7 @@ atareaoppa="ppa:atareao/atareao"
 subppa="ppa:webupd8team/sublime-text-3"
 
 #Variables for apps being installed
+ALLAPPS="android-tools-adb android-tools-fastboot national-geographic-wallpaper unity-tweak-tool google-chrome-stable spaceview putty open-vm-tools-desktop evolution filezilla gimp gimp-gmic git gitg libxss1 libappindicator1 libindicator7 neofetch shutter spaceview steam sublime-text installer synaptic tor transmission uget ubuntu-cleaner"
 adb="android-tools-adb android-tools-fastboot" 
 natgeo="national-geographic-wallpaper"
 tweak="unity-tweak-tool"
@@ -50,143 +55,251 @@ deebweb="tor"
 torrent="transmission"
 dlmanager="uget"
 systemcleaner="ubuntu-cleaner"
+
 # ----------------------------------
 # learn more menu option
 # ----------------------------------
 learnmore(){
 	echo "learn more" 
 }
+
 # ----------------------------------
-#  Unattended installer function
+#  UNATTENDED INSTALLER FUNCTION
 # ----------------------------------
 uinstaller(){
 	echo "Installer started"
+	#$((ADDPPA + ALLPPA))
+	echo -n  "All Dependancies installed"
+	echo -n  "Updating system now"
+	#$UPDATE
+	#read -t 3 -p  "Update complete"
+	#echo -t 3 -p  "Installing all packages"
+	#$INSTALL $ALLAPPS
         pause
 }
+
 # ----------------------------------
-#  Software List Menu functions and Variables
+#  UNATTENDED DEPENDANCY CHECK
 # ----------------------------------
-## option 1()
-SL_one(){
-	echo "number() called"
-        pause
-}
-## option 2 ()
-SL_two(){
-	echo "number() called"
-        pause
-}
-## Option 3()
-SL_three(){
-	echo "number() called"
-        pause
-}
-## Option 4()
-SL_four(){
-	echo "number() called"
-        pause
-}
-## Option 5 ()
-SL_five(){
-	echo "number() called"
-        pause
-}
-## Option 6 ()
-SL_six(){
-	echo "number() called"
-        pause
-}
-## option 7 ()
-SL_seven(){
-	echo "number() called"
-        pause
-}
-## Option 8()
-SL_eight(){
-	echo "number() called"
-        pause
-}
-## Option 9()
-SL_nine(){
-	echo "number() called"
-        pause
-}
-## Option 10 ()
-SL_ten(){
-	echo "number() called"
-        pause
-}
-## Option 11 ()
-SL_eleven(){
-	echo "number() called"
-        pause
-}
-## option 12 ()
-SL_twelve(){
-	echo "number() called"
-        pause
-}
-## Option 13()
-SL_thirteen(){
-	echo "number() called"
-        pause
-}
-## Option 14()
-SL_fourteen(){
-	echo "number() called"
-        pause
-}
-## Option 15 ()
-SL_fifteen(){
-	echo "number() called"
-        pause
-}
-## Option 16 ()
-SL_sixteen(){
-	echo "number() called"
-        pause
-}
-## option 17 ()
-SL_seventeen(){
-	echo "number() called"
-        pause
-}
-## Option 18()
-SL_eighteen(){
-	echo "number() called"
-        pause
-}
-## Option 19()
-SL_nineteen(){
-	echo "number() called"
-        pause
-}
-## Option 20 ()
-SL_twenty(){
-	echo "number() called"
-        pause
-}
+install_check()
+while true; do
+	read -t 2 -p "You must install all dependancies first"
+	read -p "Want to do that now? (y/n)" input
+	case $input in
+	[[yY])
+		echo "cool story bro"
+		;; 
+	[nN])
+		backtomain
+		break
+       		;;
+    *)
+	echo "Invalid input..."
+	echo "Please type (y)Yes or (n)No" 
+	;;
+esac
+done
+
 # ----------------------------------
-#  Return function
+#  Return functions
 # ----------------------------------
 #pause
 pause(){
   read -p "Press [Enter] key to continue..." fackEnterKey
 }
-# Press M to return
-M_button(){
-  showmenus
-}
+
+# ----------------------------------
 #back to main menu
+# ----------------------------------
 backtomain(){
   show_menus
+}
+
+# ----------------------------------
+#  Main Menu Option
+# ----------------------------------
+one(){
+	while true; do
+	read -p "Are you sure you want to run the unattended installer?" input
+	case $input in
+	[yY][eE][sS]|[yY])
+		install_check
+		;; 
+	[nN][oO]|[nN])
+		backtomain
+		break
+       		;;
+    *)
+	echo "Invalid input..."
+	echo "Please type (y)Yes or (n)No" 
+	;;
+esac
+done
+        pause
+}
+## Option two Update PPA List ()
+two(){
+	echo "two() called"
+        pause
+}
+## Option three Check Software List()
+three(){
+	software_list
+        #pause
+}
+## Option four Contributors()
+four(){
+	contributors
+}
+## Option five Exit ()
+five(){
+	clear
+	exit
+}
+
+# ----------------------------------
+#  SOFTWARE LIST MENU OPTIONS
+# ----------------------------------
+SL1(){
+	echo "software list option selected"
+	software_list
+}
+SL2(){
+	echo "software list option selected"
+	software_list
+}
+SL3(){
+	echo "software list option selected"
+	software_list
+}
+SL4(){
+	echo "software list option selected"
+	software_list
+}
+SL5(){
+	echo "software list option selected"
+	software_list
+}
+SL6(){
+	echo "software list option selected"
+	software_list
+}
+SL7(){
+	echo "software list option selected"
+	software_list
+}
+SL8(){
+	echo "software list option selected"
+	software_list
+}
+SL9(){
+	apt-cache search neofetch
+	software_list
+}
+SL10(){
+	echo "software list option selected"
+	software_list
+}
+SL11(){
+	echo "software list option selected"
+	software_list
+}
+SL12(){
+	echo "software list option selected"
+	software_list
+}
+SL13(){
+	echo "software list option selected"
+	software_list
+}
+SL14(){
+	echo "software list option selected"
+	software_list
+}
+SL15(){
+	echo "software list option selected"
+	software_list
+}
+SL16(){
+	echo "software list option selected"
+	software_list
+}
+SL17(){
+	echo "software list option selected"
+	software_list
+}
+SL18(){
+	echo "software list option selected"
+	software_list
+}
+SL19(){
+	echo "software list option selected"
+	software_list
+}
+SL20(){
+	echo "software list option selected"
+	software_list
+}
+
+# ----------------------------------
+#  MAIN MENU
+# ----------------------------------
+read_options(){
+	local choice
+	read -p "Enter choice [ 1 - 5] " choice
+	case $choice in
+		1) one    ;;
+		2) two    ;;
+		3) three  ;;
+		4) four   ;;
+		5) five   ;;
+		*) echo -e "${RED}Error...${STD}" && sleep 2
+	esac
+}
+
+# ----------------------------------
+#  SOFTWARE LIST MENU 
+# ----------------------------------
+sl_options(){
+	local softchoice
+	read -p "Enter choice [ 001 - 020] " softchoice
+	case $softchoice in
+		001) SL1  ;;
+		002) SL2  ;;
+		003) SL3  ;;
+		004) SL4  ;;
+		005) SL5  ;;
+		006) SL6  ;;
+		007) SL7  ;;
+		008) SL8  ;;
+		009) SL9  ;;
+		010) SL10 ;;
+		011) SL11 ;;
+		012) SL12 ;;
+		013) SL13 ;;
+		014) SL14 ;;
+		015) SL15 ;;
+		016) SL16 ;;
+		017) SL17 ;;
+		018) SL18 ;;
+		019) SL19 ;;
+		020) SL20 ;;
+	[mM])
+		show_menus
+		#break
+       		;;
+		*) echo -e "${RED}Invalid option choose [ 001 - 020] or "m" to quit...${STD}" && sleep 2
+       		clear     
+		software_list 
+		       ;;
+esac
 }
 
 # function to display menus
 show_menus() {
 	clear
-	echo   "|~~~~~~~~~~~~~~~~~~~~~---------------------------------------------|"
-	echo   "|~~~~~~~~~~~~~~~~~~~~~---------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
 	echo   "|                                                                  |" 
 	echo   "| ######## ########  ########  ######  ##     ##                   |"
 	echo   "| ##       ##     ## ##       ##    ## ##     ##                   |"
@@ -207,55 +320,57 @@ show_menus() {
 	echo   "| the latest version of Ubuntu                                     |"
 	echo   "| created By @TechGameTeddy                                        |"
 	echo   "|                                                                  |"
-	echo   "| ~~~~~~~~~~~~~~~~~~~~~--------------------------------------------|"
-	echo   "| ~~~~~~~~~~~~~~~~~~~~~--------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
 	echo   "|1. Run unattended installer                                       |"
 	echo   "|2. Install Dependancies                                           |"
 	echo   "|3. Check Software List                                            |"
 	echo   "|4. Contribute                                                     |"
 	echo   "|5. Exit                                                           |" 
 	echo   "|                                                                  |"
-	echo   "| ~~~~~~~~~~~~~~~~~~~~~--------------------------------------------|"
+	echo   "|------------------------------------------------------------------|"
 
 }
+
 software_list() {
-	write_header " Package List open-vm-tools-desktop
-"
-	clear
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"	
-	echo " Essential Tools to install post installing Ubuntu   |" 
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"
-	echo "                                                     |"
-	echo "1. Android Device Manager                            |" 
-	echo "2. Chromium                                          |"
-	echo "3. Evolution                                         |"
-	echo "4. Filezilla                                         |"
-	echo "5. Gimp                                              |"
-	echo "6. Git                                               |"
-	echo "7. Inkscape                                          |"
-	echo "8. National-geographic-wallpaper                     |"
-	echo "9. Neofetch                                          |"
-	echo "10.Putty                                             |"
-	echo "11.Shutter                                           |"
-	echo "12.Spaceview                                         |"
-	echo "13.Steam                                             |"
-	echo "14.Synaptic Package Manager                          |"
-	echo "15.Tor                                               |"
-	echo "16.Transmission                                      |"
-	echo "17.Ubuntu System Cleaner                             |"
-	echo "18.Unity Tweak Tool                                  |"
-	echo "19.Visual Studio Code                                |"
-	echo "20.Virtual Box                                      |"
-	echo "                                                     |"
-	echo "      type learn# to learn more about each item      |"  
-	echo "       or press M to go back to the main menu        |"
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"
+	write_header " Package List "
 
+	clear
+	echo "||-------------------------------------------------------||"	
+	echo "||  Essential Tools to install post installing Ubuntu    ||" 
+	echo "||-------------------------------------------------------||"
+	echo "||                                                       ||"
+	echo "||	001.Android Device Manager                       ||" 
+	echo "||	002.Chromium                                     ||"
+	echo "||	003.Evolution                                    ||"
+	echo "||	004.Filezilla                                    ||"
+	echo "||	005.Gimp                                         ||"
+	echo "||	006.Git                                          ||"
+	echo "||	007.Inkscape                                     ||"
+	echo "||	008.National-geographic-wallpaper                ||"
+	echo "||	009.Neofetch                                     ||"
+	echo "||	010.Putty                                        ||"
+	echo "||	011.Shutter                                      ||"
+	echo "||	012.Spaceview                                    ||"
+	echo "||	013.Steam                                        ||"  
+	echo "||	014.Synaptic Package Manager                     ||"
+	echo "||	015.Tor                                          ||"
+	echo "||	016.Transmission                                 ||"
+	echo "||	017.Ubuntu System Cleaner                        ||"
+	echo "||	018.Unity Tweak Tool                             ||"
+	echo "||	019.Visual Studio Code                           ||"
+	echo "||	020.Virtual Box                                  ||"
+	echo "||                                                       ||"
+	echo "||       type the "#" to learn more about each item        ||"  
+	echo "||       or press "m" to go back to the main menu          ||"
+	echo "||-------------------------------------------------------||"
+	sl_options
 }
-contributors() {
+
+contributors(){
 	write_header " Contributors "
 	clear
-	echo "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"
+	echo "|------------------------------------------------------------------|"
 	echo "|      ~~|~~|  |  /\  |\  || /  \   //~~\ |   |                    |"
 	echo "|        |  |--| /__\ | \ ||(    \ /|    ||   |                    |"
 	echo "|        |  |  |/    \|  \|| \    |  \__/  \_/                     |"
@@ -268,79 +383,16 @@ contributors() {
 	echo "|  3.Someone else not as great as you                              |"
 	echo "|                                                                  |"
 	echo "|  Send all contribution request via Twitter to @TechGameTeddy     |"
-	echo "|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|"
+	echo "|------------------------------------------------------------------|"
 	pause
 }
-# ----------------------------------
-#  Main Menu Option
-# ----------------------------------
 
-## Option one Unattended installer ()
-one(){
-	while true; do
-    read -p "Are you sure you want to run the unattended installer?" input
-case $input in
-    [yY][eE][sS]|[yY])
-		uinstaller
-		;;
- 
-    [nN][oO]|[nN])
-		backtomain
-		break
-       		;;
-    *)
-	echo "Invalid input..."
-	echo "Please type (y)Yes or (n)No" 
-	;;
-esac
-done
-        pause
-}
-## Option two Update PPA List ()
-two(){
-	echo "two() called"
-        pause
-}
-
-## Option three Check Software List()
-three(){
-	software_list
-        pause
-}
- 
-## Option four Contributors()
-four(){
-	contributors
-
-}
-## Option five Exit ()
-five(){
-	exit
-        pause
-}
-# read input from the keyboard and take a action
-# invoke the numbers() when the user select an option from the menu option.
-read_options(){
-	local choice
-	read -p "Enter choice [ 1 - 5] " choice
-	case $choice in
-		1) one   ;;
-		2) two   ;;
-		3) three ;;
-		4) four  ;;
-		5) five  ;;
-		*) echo -e "${RED}Error...${STD}" && sleep 2
-	esac
-}
- 
 # Trap CTRL+C, CTRL+Z and quit singles
 trap '' SIGINT SIGQUIT SIGTSTP
  
 # Main Menu logic - infinite loop
 while true
 do
- 
 	show_menus
 	read_options
-
 done
