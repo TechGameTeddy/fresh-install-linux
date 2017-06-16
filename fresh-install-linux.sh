@@ -1,24 +1,23 @@
 #!/bin/bash 
 # Name: Fresh Install
 # Author: Tedley Meralus 
-# contact: @TechGameTeddy
-# This script is a list of popular tools and utilities 
-# to install inspired by OMG Ubuntu's infamous 
+# Contact: @TechGameTeddy
+# Menu driven script to automate and download a list of popular tools and utilities 
+# to install on a Linux desktop
+# inspired by OMG Ubuntu's infamous 
 # Top Things to do after Installing Ubuntu xx.xx articles
 # check them out at http://www.omgubuntu.co.uk/2017/04/things-to-do-after-installing-ubuntu-17-04
 #
 
-# Variables 
+# Define Variables 
 STARTOFSCRIPT='date'
 ALLPPA="AllPPA"
 INSTALL="sudo apt-get install"
 ADDPPA="sudo add-apt-repository "
 ALLPPA= echo "all ppa's installed"
-
 #ALLPPA="ppa:graphics-drivers/ppa ppa:dawidd0811/neofetch ppa:vlijm/spaceview ppa:gerardpuig/ppa ppa:shutter/ppa ppa:atareao/atareao ppa:webupd8team/sublime-text-3"
 SEARCH="apt-cache search"
 UPDATE="sudo apt-get udpate"
-
 # Variables to install all available ppa's 
 nvidia="ppa:graphics-drivers/ppa" 
 neoppa="ppa:dawidd0811/neofetch"
@@ -27,7 +26,6 @@ gerardpuig="ppa:gerardpuig/ppa"
 shutppa="ppa:shutter/ppa"
 atareaoppa="ppa:atareao/atareao"
 subppa="ppa:webupd8team/sublime-text-3"
-
 #Variables for apps being installed
 ALLAPPS="android-tools-adb android-tools-fastboot national-geographic-wallpaper unity-tweak-tool google-chrome-stable spaceview putty open-vm-tools-desktop evolution filezilla gimp gimp-gmic git gitg libxss1 libappindicator1 libindicator7 neofetch shutter spaceview steam sublime-text installer synaptic tor transmission uget ubuntu-cleaner"
 adb="android-tools-adb android-tools-fastboot" 
@@ -55,14 +53,87 @@ deebweb="tor"
 torrent="transmission"
 dlmanager="uget"
 systemcleaner="ubuntu-cleaner"
+# ----------------------------------
+# function to display menus
+# ----------------------------------
+show_menus() {
+	clear
+	date
+	echo "|--------------------------------------------------------"
+	echo "|--------------------------------------------------------"	
+	echo "|         FRESH INSTALL                                  " 
+	echo "|--------------------------------------------------------" 
+	echo "| Essential tools/utilities to install 				   "
+	echo "| after installing the latest version of Ubuntu          "
+	echo "| created By @TechGameTeddy                              "
+	echo "|                                                        "
+	echo "|                                                        "
+	echo "|1. Run unattended installer                             "
+	echo "|2. Install Dependancies                                 "
+	echo "|3. Check Software List                                  "
+	echo "|4. Contribute                                           "
+	echo "|5. Exit                                                 " 
+	echo "|--------------------------------------------------------"
 
+}
+software_list() {
+	write_header " Package List "
+	clear
+	echo "|-----------------------------------------------------------------"	
+	echo "|  Essential Tools to install post installing Ubuntu              " 
+	echo "|-----------------------------------------------------------------"
+	echo "|                                                                 "
+	echo "|	001.Android Device Manager                                      " 
+	echo "|	002.Chromium                                                    "
+	echo "|	003.Evolution                                                   "
+	echo "|	004.Filezilla                                                   "
+	echo "|	005.Gimp                                                        "
+	echo "|	006.Git                                                         "
+	echo "|	007.Inkscape                                                    "
+	echo "|	008.National-geographic-wallpaper                               "
+	echo "|	009.Neofetch                                                    "
+	echo "|	010.Putty                                                       "
+	echo "| 011.Shutter                                                     "
+	echo "|	012.Spaceview                                                   "
+	echo "|	013.Steam                                                       "  
+	echo "|	014.Synaptic Package Manager                                    "
+	echo "|	015.Tor                                                         "
+	echo "|	016.Transmission                                                "
+	echo "|	017.Ubuntu System Cleaner                                       "
+	echo "|	018.Unity Tweak Tool                                            "
+	echo "| 019.Visual Studio Code                                          "
+	echo "| 020.Virtual Box                                                 "
+	echo "|                                                                 "
+	echo "|  type the "#" to learn more about each item                     "  
+	echo "|  or press "m" to go back to the main menu                       "
+	echo "| ----------------------------------------------------------------"
+	sl_options
+}
+contributors(){
+	write_header " Contributors "
+	clear
+	echo "|------------------------------------------------------------------"
+	echo "|      ~~|~~|  |  /\  |\  || /  \   //~~\ |   |                    "
+	echo "|        |  |--| /__\ | \ ||(    \ /|    ||   |                    "
+	echo "|        |  |  |/    \|  \|| \    |  \__/  \_/                     "
+	echo "|                                                                  "	
+	echo "|                                                                  "
+	echo "|  All Contributions are greatly appreciated and listed here       " 
+	echo "|                                                                  "
+	echo "|  1.Tedley Meralus @TechGameTeddy                                 "
+	echo "|  2.Could be you                                                  "
+	echo "|  3.Someone else not as great as you                              "
+	echo "|                                                                  "
+	echo "|  Send all contribution request via Twitter to @TechGameTeddy     "
+	echo "|------------------------------------------------------------------"
+	pause
+}
 # ----------------------------------
 # learn more menu option
 # ----------------------------------
 learnmore(){
 	echo "learn more" 
 }
-
 # ----------------------------------
 #  UNATTENDED INSTALLER FUNCTION
 # ----------------------------------
@@ -77,7 +148,6 @@ uinstaller(){
 	#$INSTALL $ALLAPPS
         pause
 }
-
 # ----------------------------------
 #  UNATTENDED DEPENDANCY CHECK
 # ----------------------------------
@@ -99,7 +169,6 @@ while true; do
 	;;
 esac
 done
-
 # ----------------------------------
 #  Return functions
 # ----------------------------------
@@ -107,14 +176,12 @@ done
 pause(){
   read -p "Press [Enter] key to continue..." fackEnterKey
 }
-
 # ----------------------------------
 #back to main menu
 # ----------------------------------
 backtomain(){
   show_menus
 }
-
 # ----------------------------------
 #  Main Menu Option
 # ----------------------------------
@@ -156,7 +223,6 @@ five(){
 	clear
 	exit
 }
-
 # ----------------------------------
 #  SOFTWARE LIST MENU OPTIONS
 # ----------------------------------
@@ -240,13 +306,12 @@ SL20(){
 	echo "software list option selected"
 	software_list
 }
-
 # ----------------------------------
 #  MAIN MENU
 # ----------------------------------
 read_options(){
 	local choice
-	read -p "Enter choice [ 1 - 5] " choice
+	read -p "Enter your choice [ 1 - 5] " choice
 	case $choice in
 		1) one    ;;
 		2) two    ;;
@@ -256,7 +321,6 @@ read_options(){
 		*) echo -e "${RED}Error...${STD}" && sleep 2
 	esac
 }
-
 # ----------------------------------
 #  SOFTWARE LIST MENU 
 # ----------------------------------
@@ -294,105 +358,30 @@ sl_options(){
 		       ;;
 esac
 }
-
-# function to display menus
-show_menus() {
-	clear
-	echo   "|------------------------------------------------------------------|"
-	echo   "|------------------------------------------------------------------|"
-	echo   "|                                                                  |" 
-	echo   "| ######## ########  ########  ######  ##     ##                   |"
-	echo   "| ##       ##     ## ##       ##    ## ##     ##                   |"
-	echo   "| ##       ##     ## ##       ##       ##     ##                   |"
-	echo   "| ######   ########  ######    ######  #########                   |"
-	echo   "| ##       ##   ##   ##             ## ##     ##                   |"
-	echo   "| ##       ##    ##  ##       ##    ## ##     ##                   |"
-	echo   "| ##       ##     ## ########  ######  ##     ##                   |"
-	echo   "|#### ##    ##  ######  ########    ###    ##       ##             |"   
- 	echo   "| ##  ###   ## ##    ##    ##      ## ##   ##       ##             |"   
- 	echo   "| ##  ####  ## ##          ##     ##   ##  ##       ##             |"   
- 	echo   "| ##  ## ## ##  ######     ##    ##     ## ##       ##             |"   
- 	echo   "| ##  ##  ####       ##    ##    ######### ##       ##             |"   
- 	echo   "| ##  ##   ### ##    ##    ##    ##     ## ##       ##             |"   
-	echo   "|#### ##    ##  ######     ##    ##     ## ######## ########       |"
-	echo   "|                                                                  |"
-	echo   "| Essential tools/utilities to install after installing            |"
-	echo   "| the latest version of Ubuntu                                     |"
-	echo   "| created By @TechGameTeddy                                        |"
-	echo   "|                                                                  |"
-	echo   "|------------------------------------------------------------------|"
-	echo   "|------------------------------------------------------------------|"
-	echo   "|1. Run unattended installer                                       |"
-	echo   "|2. Install Dependancies                                           |"
-	echo   "|3. Check Software List                                            |"
-	echo   "|4. Contribute                                                     |"
-	echo   "|5. Exit                                                           |" 
-	echo   "|                                                                  |"
-	echo   "|------------------------------------------------------------------|"
-
-}
-
-software_list() {
-	write_header " Package List "
-
-	clear
-	echo "||-------------------------------------------------------||"	
-	echo "||  Essential Tools to install post installing Ubuntu    ||" 
-	echo "||-------------------------------------------------------||"
-	echo "||                                                       ||"
-	echo "||	001.Android Device Manager                       ||" 
-	echo "||	002.Chromium                                     ||"
-	echo "||	003.Evolution                                    ||"
-	echo "||	004.Filezilla                                    ||"
-	echo "||	005.Gimp                                         ||"
-	echo "||	006.Git                                          ||"
-	echo "||	007.Inkscape                                     ||"
-	echo "||	008.National-geographic-wallpaper                ||"
-	echo "||	009.Neofetch                                     ||"
-	echo "||	010.Putty                                        ||"
-	echo "||	011.Shutter                                      ||"
-	echo "||	012.Spaceview                                    ||"
-	echo "||	013.Steam                                        ||"  
-	echo "||	014.Synaptic Package Manager                     ||"
-	echo "||	015.Tor                                          ||"
-	echo "||	016.Transmission                                 ||"
-	echo "||	017.Ubuntu System Cleaner                        ||"
-	echo "||	018.Unity Tweak Tool                             ||"
-	echo "||	019.Visual Studio Code                           ||"
-	echo "||	020.Virtual Box                                  ||"
-	echo "||                                                       ||"
-	echo "||       type the "#" to learn more about each item        ||"  
-	echo "||       or press "m" to go back to the main menu          ||"
-	echo "||-------------------------------------------------------||"
-	sl_options
-}
-
-contributors(){
-	write_header " Contributors "
-	clear
-	echo "|------------------------------------------------------------------|"
-	echo "|      ~~|~~|  |  /\  |\  || /  \   //~~\ |   |                    |"
-	echo "|        |  |--| /__\ | \ ||(    \ /|    ||   |                    |"
-	echo "|        |  |  |/    \|  \|| \    |  \__/  \_/                     |"
-	echo "|                                                                  |"	
-	echo "|                                                                  |"
-	echo "|  All Contributions are greatly appreciated and listed here       |" 
-	echo "|                                                                  |"
-	echo "|  1.Tedley Meralus @TechGameTeddy                                 |"
-	echo "|  2.Could be you                                                  |"
-	echo "|  3.Someone else not as great as you                              |"
-	echo "|                                                                  |"
-	echo "|  Send all contribution request via Twitter to @TechGameTeddy     |"
-	echo "|------------------------------------------------------------------|"
-	pause
-}
-
+# ----------------------------------
 # Trap CTRL+C, CTRL+Z and quit singles
+# ----------------------------------
 trap '' SIGINT SIGQUIT SIGTSTP
  
+# ----------------------------------
 # Main Menu logic - infinite loop
+# ----------------------------------
 while true
 do
 	show_menus
 	read_options
 done
+	#echo   "| ######## ########  ########  ######  ##     ##                   |"
+	#echo   "| ##       ##     ## ##       ##    ## ##     ##                   |"
+	#echo   "| ##       ##     ## ##       ##       ##     ##                   |"
+	#echo   "| ######   ########  ######    ######  #########                   |"
+	#echo   "| ##       ##   ##   ##             ## ##     ##                   |"
+	#echo   "| ##       ##    ##  ##       ##    ## ##     ##                   |"
+	#echo   "| ##       ##     ## ########  ######  ##     ##                   |"
+	#echo   "|#### ##    ##  ######  ########    ###    ##       ##             |"   
+ 	#echo   "| ##  ###   ## ##    ##    ##      ## ##   ##       ##             |"   
+ 	#echo   "| ##  ####  ## ##          ##     ##   ##  ##       ##             |"   
+ 	#echo   "| ##  ## ## ##  ######     ##    ##     ## ##       ##             |"   
+ 	#echo   "| ##  ##  ####       ##    ##    ######### ##       ##             |"   
+ 	#echo   "| ##  ##   ### ##    ##    ##    ##     ## ##       ##             |"   
+	#echo   "|#### ##    ##  ######     ##    ##     ## ######## ########       |"
