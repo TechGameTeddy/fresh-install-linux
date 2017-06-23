@@ -6,8 +6,8 @@ install a list of essential software used for any Debian Linux based
 Here is a list of the current software installed when you run the unattended 
 installer. 
 
-1.
-Chromium – Open-source web browser (differences)
+
+Chromium – Open-source web browser (differences)   
 code - Code Editing. Redefined. 
 VLC – Versatile media player
 Steam – Game distribution platform
