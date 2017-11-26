@@ -31,9 +31,11 @@ Neofetch- ClI script to show your system's info and dsiplay an image using w3m
 
 Spaceview -gui to check disk space on a linux machine 
 
-Shutter - feature-rich screenshot program
+Docker- Punctual, lightweight development environments using Docker
 
-Sublime-text editor 
+NPM- Package manager for Node.js
+
+Shutter - feature-rich screenshot program
 
 android-tools-adb - device drivers for adb devices 
 

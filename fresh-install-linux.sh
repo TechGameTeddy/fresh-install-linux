@@ -8,16 +8,17 @@ https://github.com/TechGameTeddy/fresh-install-linux.git#!/bin/bash
 # Top Things to do after Installing Ubuntu xx.xx articles
 # check them out at http://www.omgubuntu.co.uk/2017/04/things-to-do-after-installing-ubuntu-17-04
 #
-
 # Define Variables 
 STARTOFSCRIPT='date'
 #ALLPPA="AllPPA"
-INSTALL="sudo apt-get install"
+INSTALL="sudo apt-get install "
 ADDPPA="sudo add-apt-repository "
-ALLPPA= echo "all ppa's installed"
-ALLPPA="ppa:dawidd0811/neofetch ppa:vlijm/spaceview ppa:gerardpuig/ppa ppa:shutter/ppa ppa:atareao/atareao ppa:webupd8team/sublime-text-3"
-SEARCH="apt-cache search"
+ALLPPA="ppa:dawidd0811/neofetch ppa:vlijm/spaceview ppa:gerardpuig/ppa ppa:shutter/ppa ppa:atareao/atareao"
+SEARCH="apt-cache search "
 UPDATE="sudo apt-get udpate"
+PPADIR="/etc/apt/sources.list/"
+PPADIR2="/etc/apt/sources.list.d/"
+
 # Variables to install all available ppa's 
 nvidia="ppa:graphics-drivers/ppa" 
 neoppa="ppa:dawidd0811/neofetch"
@@ -26,33 +27,40 @@ gerardpuig="ppa:gerardpuig/ppa"
 shutppa="ppa:shutter/ppa"
 atareaoppa="ppa:atareao/atareao"
 subppa="ppa:webupd8team/sublime-text-3"
+
 #Variables for apps being installed
-ALLAPPS="$android-tools-adb $android-tools-fastboot $ftp $unity-tweak-tool $chrome $spaceview $putty $virtualbox $filezilla $gimp $git $gitg $libxss1 $libappindicator1 $libindicator7 $shutter s$paceview $steam $sublime-text-installer $synaptic $tor $transmission $uget $ubuntu-cleaner"
-adb="android-tools-adb android-tools-fastboot" 
-natgeo="national-geographic-wallpaper"
-tweak="unity-tweak-tool"
-#chrome="chromium-browser"
-spaceview="spaceview"
-putty="putty"
-virtualbox="open-vm-tools-desktop"
-mail="evolution"
+ALLAPPS="$adb $adb2 $code $chrome $deebweb $docker $ftp $gimp $git $gnucore $ink $libxss1 $libappindicator1 $libindicator7 $mail $natgeo $neofetch $npm $pol $putty $screenshot $steam $synaptic $systemcleaner $terminator $torrent $tweak $uget $unity $vagrant $virtualbox"
+adb="android-tools-adb"
+adb2="android-tools-fastboot" 
+code="code"
+chrome="chromium-browser"
+deebweb="tor"
+docker="docker"
 ftp="filezilla"
 gimp="gimp"
 git="git"
-guigit="gitg"
+gnucore="coreutils"
+ink="inkscape"
 libxss1="libxss1"
 libappindicator1="libappindicator1"
 libindicator7="libindicator7"
-#neofetch="neofetch"
+mail="evolution"
+natgeo="national-geographic-wallpaper"
+neofetch="neofetch"
+npm="npm"
+pol="playonlinux"
+putty="putty"
 screenshot="shutter"
-#spaceview="spaceview"
 steam="steam"
-#sublime="sublime-text-installer"
 synaptic="synaptic"
-deebweb="tor"
+systemcleaner="ubuntu-cleaner"
+terminator="terminator"
 torrent="transmission"
-dlmanager="uget"
-#systemcleaner="ubuntu-cleaner"
+tweak="unity-tweak-tool"
+uget="uget"
+unity="unity-tweak-tool"
+vagrant="vagrant"
+virtualbox="open-vm-tools-desktop"
 # ----------------------------------
 # function to display menus
 # ----------------------------------
@@ -70,10 +78,8 @@ show_menus() {
 	echo "|1. Run unattended installer                             "
 	echo "|2. Install Dependancies                                 "
 	echo "|3. Check Software List                                  "
-	echo "|4. Contribute                                           "
 	echo "|5. Exit                                                 " 
 	echo "|--------------------------------------------------------"
-
 }
 software_list() {
 	write_header " Package List "
@@ -87,9 +93,10 @@ software_list() {
 	echo "|	003.Filezilla                                                   "
 	echo "|	004.Gimp                                                        "
 	echo "|	005.Git                                                         "
-	echo "|	006.Inkscape                                                    "
-	echo "|	017.Putty                                                       "
-	echo "| 008.Shutter                                                     "
+	echo "|	006.GNU Coreutils                                                         "
+	echo "|	007.Inkscape                                                    "
+	echo "|	008.Putty                                                       "
+	echo "| 009.Shutter                                                     "
 	echo "|	010.Steam                                                       "  
 	echo "|	011.Synaptic Package Manager                                    "
 	echo "|	012.Tor                                                         "
@@ -100,122 +107,10 @@ software_list() {
 	echo "| 017.Virtual Box                                                 "
 	echo "|                                                                 "
 	echo "|  type the "#" to learn more about each item                     "  
-	echo "|  or press "m" to go back to the main menu                       "
+#	echo "|  or type "i" and the "#" to install individual apps             " 
+	echo "|  press "m" to go back to the main menu                          "
 	echo "| ----------------------------------------------------------------"
 	sl_options
-}
-contributors(){
-	write_header " Contributors "
-	clear
-	echo "|------------------------------------------------------------------"
-	echo "|      ~~|~~|  |  /\  |\  || /  \   //~~\ |   |                    "
-	echo "|        |  |--| /__\ | \ ||(    \ /|    ||   |                    "
-	echo "|        |  |  |/    \|  \|| \    |  \__/  \_/                     "
-	echo "|                                                                  "	
-	echo "|                                                                  "
-	echo "|  All Contributions are greatly appreciated and listed here       " 
-	echo "|                                                                  "
-	echo "|  1.Tedley Meralus @TechGameTeddy                                 "
-	echo "|  2.Could be you                                                  "
-	echo "|  3.Someone else not as great as you                              "
-	echo "|                                                                  "
-	echo "|  Send all contribution request via Twitter to @TechGameTeddy     "
-	echo "|------------------------------------------------------------------"
-	pause
-}
-# ----------------------------------
-# learn more menu option
-# ----------------------------------
-learnmore(){
-	echo "learn more" 
-}
-# ----------------------------------
-#  UNATTENDED INSTALLER FUNCTION
-# ----------------------------------
-uinstaller(){
-	echo "Installer started"
-	#$((ADDPPA + ALLPPA))
-	echo -n  "All Dependancies installed"
-	echo -n  "Updating system now"
-	#$UPDATE
-	#read -t 3 -p  "Update complete"
-	#echo -t 3 -p  "Installing all packages"
-	#$INSTALL $ALLAPPS
-        pause
-}
-# ----------------------------------
-#  UNATTENDED DEPENDANCY CHECK
-# ----------------------------------
-install_check()
-while true; do
-	read -p "Begin unattended installer (y/n)" input
-	case $input in
-	[[yY])
-		#$ALLPPA
-		$INSTALL $ALLAPPS
-		;; 
-	[nN])
-		backtomain
-		break
-      		;;
-    *)
-	echo "Invalid input..."
-	echo "Please type (y)Yes or (n)No" 
-	;;
-esac
-done
-# ----------------------------------
-#  Return functions
-# ----------------------------------
-#pause
-pause(){
-  read -p "Press [Enter] key to continue..." fackEnterKey
-}
-# ----------------------------------
-#back to main menu
-# ----------------------------------
-backtomain(){
-  show_menus
-}
-# ----------------------------------
-#  Main Menu Option
-# ----------------------------------
-one(){
-	while true; do
-	read -p "Are you sure you want to run the unattended installer?" input
-	case $input in
-	[yY][eE][sS]|[yY])
-		install_check
-		;; 
-	[nN][oO]|[nN])
-		backtomain
-       		break;;
-    *)
-	echo "Invalid input..."
-	echo "Please type (y)Yes or (n)No" 
-	;;
-esac
-done
-        pause
-}
-## Option two Update PPA List ()
-two(){
-	echo "two() called"
-        pause
-}
-## Option three Check Software List()
-three(){
-	software_list
-        #pause
-}
-## Option four Contributors()
-four(){
-	contributors
-}
-## Option five Exit ()
-five(){
-	clear
-	exit
 }
 # ----------------------------------
 #  SOFTWARE LIST MENU OPTIONS
@@ -281,7 +176,7 @@ SL15(){
 	software_list
 }
 SL16(){
-	echo "software list option selected"
+	vs_code
 	software_list
 }
 SL17(){
@@ -301,17 +196,81 @@ SL20(){
 	software_list
 }
 # ----------------------------------
+#  UNATTENDED INSTALLER FUNCTION
+# ----------------------------------
+uinstaller(){
+	echo "Installer started"
+	#echo "Downloading Dependancies"
+	#$INSTALL $ALLPPA
+	#echo "All Dependancies installed"
+	echo "Updating system now"
+	$UPDATE
+	read -t 3 -p  "Update complete"
+	echo -t 3 -p  "Installing all packages"
+	$INSTALL $ALLAPPS
+        pause
+}
+
+# ----------------------------------
+#  Return functions
+# ----------------------------------
+pause(){
+  read -p "Press [Enter] key to continue..." fackEnterKey
+}
+# ----------------------------------
+#back to main menu
+# ----------------------------------
+backtomain(){
+  show_menus
+}
+# ----------------------------------
+#  Main Menu Option
+# ----------------------------------
+one(){
+	while true; do
+	read -p "Are you sure you want to run the unattended installer?[y/n]" input
+	case $input in
+	[yY][eE][sS]|[yY])
+		$INSTALL$ALLAPPS	
+#uinstaller
+		;; 
+	[nN][oO]|[nN])
+		backtomain
+       		break;;
+    *)
+	echo "Invalid input..."
+	echo "Please type (y)Yes or (n)No" 
+	;;
+esac
+done
+        pause
+}
+## Option two Update PPA List ()
+two(){
+	echo "two() called"
+        pause
+}
+## Option three Check Software List()
+three(){
+	software_list
+        #pause
+}
+## Option four Exit ()
+four(){
+	clear
+	exit
+}
+# ----------------------------------
 #  MAIN MENU
 # ----------------------------------
 read_options(){
 	local choice
-	read -p "Enter your choice [ 1 - 5] " choice
+	read -p "Enter your choice [ 1 - 4] " choice
 	case $choice in
 		1) one    ;;
 		2) two    ;;
 		3) three  ;;
 		4) four   ;;
-		5) five   ;;
 		*) echo -e "${RED}Error...${STD}" && sleep 2
 	esac
 }
@@ -342,9 +301,10 @@ sl_options(){
 		018) SL18 ;;
 		019) SL19 ;;
 		020) SL20 ;;
+	[iI]) 
+		eval $INSTALL;;
 	[mM])
 		show_menus
-		#break
        		;;
 		*) echo -e "${RED}Invalid option choose [ 001 - 020] or "m" to quit...${STD}" && sleep 2
        		clear     
@@ -364,4 +324,24 @@ while true
 do
 	show_menus
 	read_options
+	date_and_time
 done
+
+# ----------------------------------
+#  Visual Studio Code installer
+# ----------------------------------
+#vs_code(){
+#	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+# 	mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+# 	sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" #> /etc/apt/sources.list.d/vscode.list'
+#	read "You must run apt-get update to complete"
+#	read "Would you like to do that now?[y/n}" input
+#	case $input in
+#	[yY][eE][sS]|[yY])
+#		$UPDATE
+#		$INSTALL$vscode
+#		;; 
+#	[nN][oO]|[nN])
+#		softwarelist
+#       		break;;
+#}
