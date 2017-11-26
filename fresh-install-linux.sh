@@ -1,4 +1,4 @@
-#!/bin/bash 
+https://github.com/TechGameTeddy/fresh-install-linux.git#!/bin/bash 
 # Name: Fresh Install
 # Author: Tedley Meralus 
 # Contact: @TechGameTeddy
@@ -11,11 +11,11 @@
 
 # Define Variables 
 STARTOFSCRIPT='date'
-ALLPPA="AllPPA"
+#ALLPPA="AllPPA"
 INSTALL="sudo apt-get install"
 ADDPPA="sudo add-apt-repository "
 ALLPPA= echo "all ppa's installed"
-#ALLPPA="ppa:graphics-drivers/ppa ppa:dawidd0811/neofetch ppa:vlijm/spaceview ppa:gerardpuig/ppa ppa:shutter/ppa ppa:atareao/atareao ppa:webupd8team/sublime-text-3"
+ALLPPA="ppa:dawidd0811/neofetch ppa:vlijm/spaceview ppa:gerardpuig/ppa ppa:shutter/ppa ppa:atareao/atareao ppa:webupd8team/sublime-text-3"
 SEARCH="apt-cache search"
 UPDATE="sudo apt-get udpate"
 # Variables to install all available ppa's 
@@ -27,32 +27,32 @@ shutppa="ppa:shutter/ppa"
 atareaoppa="ppa:atareao/atareao"
 subppa="ppa:webupd8team/sublime-text-3"
 #Variables for apps being installed
-ALLAPPS="android-tools-adb android-tools-fastboot national-geographic-wallpaper unity-tweak-tool google-chrome-stable spaceview putty open-vm-tools-desktop evolution filezilla gimp gimp-gmic git gitg libxss1 libappindicator1 libindicator7 neofetch shutter spaceview steam sublime-text installer synaptic tor transmission uget ubuntu-cleaner"
+ALLAPPS="$android-tools-adb $android-tools-fastboot $ftp $unity-tweak-tool $chrome $spaceview $putty $virtualbox $filezilla $gimp $git $gitg $libxss1 $libappindicator1 $libindicator7 $shutter s$paceview $steam $sublime-text-installer $synaptic $tor $transmission $uget $ubuntu-cleaner"
 adb="android-tools-adb android-tools-fastboot" 
 natgeo="national-geographic-wallpaper"
 tweak="unity-tweak-tool"
-chrome="google-chrome-stable"
+#chrome="chromium-browser"
 spaceview="spaceview"
 putty="putty"
 virtualbox="open-vm-tools-desktop"
 mail="evolution"
 ftp="filezilla"
-gimp="gimp gimp-gmic"
+gimp="gimp"
 git="git"
 guigit="gitg"
 libxss1="libxss1"
 libappindicator1="libappindicator1"
 libindicator7="libindicator7"
-neofetch="neofetch"
+#neofetch="neofetch"
 screenshot="shutter"
-spaceview="spaceview"
+#spaceview="spaceview"
 steam="steam"
-sublime="sublime-text-installer"
+#sublime="sublime-text-installer"
 synaptic="synaptic"
 deebweb="tor"
 torrent="transmission"
 dlmanager="uget"
-systemcleaner="ubuntu-cleaner"
+#systemcleaner="ubuntu-cleaner"
 # ----------------------------------
 # function to display menus
 # ----------------------------------
@@ -66,7 +66,6 @@ show_menus() {
 	echo "| Essential tools/utilities to install 				   "
 	echo "| after installing the latest version of Ubuntu          "
 	echo "| created By @TechGameTeddy                              "
-	echo "|                                                        "
 	echo "|                                                        "
 	echo "|1. Run unattended installer                             "
 	echo "|2. Install Dependancies                                 "
@@ -85,24 +84,20 @@ software_list() {
 	echo "|                                                                 "
 	echo "|	001.Android Device Manager                                      " 
 	echo "|	002.Chromium                                                    "
-	echo "|	003.Evolution                                                   "
-	echo "|	004.Filezilla                                                   "
-	echo "|	005.Gimp                                                        "
-	echo "|	006.Git                                                         "
-	echo "|	007.Inkscape                                                    "
-	echo "|	008.National-geographic-wallpaper                               "
-	echo "|	009.Neofetch                                                    "
-	echo "|	010.Putty                                                       "
-	echo "| 011.Shutter                                                     "
-	echo "|	012.Spaceview                                                   "
-	echo "|	013.Steam                                                       "  
-	echo "|	014.Synaptic Package Manager                                    "
-	echo "|	015.Tor                                                         "
-	echo "|	016.Transmission                                                "
-	echo "|	017.Ubuntu System Cleaner                                       "
-	echo "|	018.Unity Tweak Tool                                            "
-	echo "| 019.Visual Studio Code                                          "
-	echo "| 020.Virtual Box                                                 "
+	echo "|	003.Filezilla                                                   "
+	echo "|	004.Gimp                                                        "
+	echo "|	005.Git                                                         "
+	echo "|	006.Inkscape                                                    "
+	echo "|	017.Putty                                                       "
+	echo "| 008.Shutter                                                     "
+	echo "|	010.Steam                                                       "  
+	echo "|	011.Synaptic Package Manager                                    "
+	echo "|	012.Tor                                                         "
+	echo "|	013.Transmission                                                "
+	echo "|	014.Ubuntu System Cleaner                                       "
+	echo "|	015.Unity Tweak Tool                                            "
+	echo "| 016.Visual Studio Code                                          "
+	echo "| 017.Virtual Box                                                 "
 	echo "|                                                                 "
 	echo "|  type the "#" to learn more about each item                     "  
 	echo "|  or press "m" to go back to the main menu                       "
@@ -153,16 +148,16 @@ uinstaller(){
 # ----------------------------------
 install_check()
 while true; do
-	read -t 2 -p "You must install all dependancies first"
-	read -p "Want to do that now? (y/n)" input
+	read -p "Begin unattended installer (y/n)" input
 	case $input in
 	[[yY])
-		echo "cool story bro"
+		#$ALLPPA
+		$INSTALL $ALLAPPS
 		;; 
 	[nN])
 		backtomain
 		break
-       		;;
+      		;;
     *)
 	echo "Invalid input..."
 	echo "Please type (y)Yes or (n)No" 
@@ -194,8 +189,7 @@ one(){
 		;; 
 	[nN][oO]|[nN])
 		backtomain
-		break
-       		;;
+       		break;;
     *)
 	echo "Invalid input..."
 	echo "Please type (y)Yes or (n)No" 
@@ -371,17 +365,3 @@ do
 	show_menus
 	read_options
 done
-	#echo   "| ######## ########  ########  ######  ##     ##                   |"
-	#echo   "| ##       ##     ## ##       ##    ## ##     ##                   |"
-	#echo   "| ##       ##     ## ##       ##       ##     ##                   |"
-	#echo   "| ######   ########  ######    ######  #########                   |"
-	#echo   "| ##       ##   ##   ##             ## ##     ##                   |"
-	#echo   "| ##       ##    ##  ##       ##    ## ##     ##                   |"
-	#echo   "| ##       ##     ## ########  ######  ##     ##                   |"
-	#echo   "|#### ##    ##  ######  ########    ###    ##       ##             |"   
- 	#echo   "| ##  ###   ## ##    ##    ##      ## ##   ##       ##             |"   
- 	#echo   "| ##  ####  ## ##          ##     ##   ##  ##       ##             |"   
- 	#echo   "| ##  ## ## ##  ######     ##    ##     ## ##       ##             |"   
- 	#echo   "| ##  ##  ####       ##    ##    ######### ##       ##             |"   
- 	#echo   "| ##  ##   ### ##    ##    ##    ##     ## ##       ##             |"   
-	#echo   "|#### ##    ##  ######     ##    ##     ## ######## ########       |"
