@@ -15,52 +15,21 @@ INSTALL="sudo apt-get install "
 ADDPPA="sudo add-apt-repository "
 ALLPPA="ppa:dawidd0811/neofetch ppa:vlijm/spaceview ppa:gerardpuig/ppa ppa:shutter/ppa ppa:atareao/atareao"
 SEARCH="apt-cache search "
-UPDATE="sudo apt-get udpate"
+SHOW="apt-cache showpkg "
+#UPDATE="apt-get udpate"
 PPADIR="/etc/apt/sources.list/"
 PPADIR2="/etc/apt/sources.list.d/"
 
 # Variables to install all available ppa's 
-nvidia="ppa:graphics-drivers/ppa" 
-neoppa="ppa:dawidd0811/neofetch"
-sviewppa="ppa:vlijm/spaceview"
-gerardpuig="ppa:gerardpuig/ppa"
-shutppa="ppa:shutter/ppa"
-atareaoppa="ppa:atareao/atareao"
-subppa="ppa:webupd8team/sublime-text-3"
+nvidia="ppa:graphics-drivers/ppa" #Nvidia ppa 
+neoppa="ppa:dawidd0811/neofetch" #neofetch ppa 
+sviewppa="ppa:vlijm/spaceview" #spaceview ppa
+gerardpuig="ppa:gerardpuig/ppa" #ubuntu cleaner ppa
+shutppa="ppa:shutter/ppa" #Shutter screenshot ppa 
+atareaoppa="ppa:atareao/atareao" #national-geographic-wallpaper ppa
 
 #Variables for apps being installed
-ALLAPPS="$adb $adb2 $code $chrome $deebweb $docker $ftp $gimp $git $gnucore $ink $libxss1 $libappindicator1 $libindicator7 $mail $natgeo $neofetch $npm $pol $putty $screenshot $steam $synaptic $systemcleaner $terminator $torrent $tweak $uget $unity $vagrant $virtualbox"
-adb="android-tools-adb"
-adb2="android-tools-fastboot" 
-code="code"
-chrome="chromium-browser"
-deebweb="tor"
-docker="docker"
-ftp="filezilla"
-gimp="gimp"
-git="git"
-gnucore="coreutils"
-ink="inkscape"
-libxss1="libxss1"
-libappindicator1="libappindicator1"
-libindicator7="libindicator7"
-mail="evolution"
-natgeo="national-geographic-wallpaper"
-neofetch="neofetch"
-npm="npm"
-pol="playonlinux"
-putty="putty"
-screenshot="shutter"
-steam="steam"
-synaptic="synaptic"
-systemcleaner="ubuntu-cleaner"
-terminator="terminator"
-torrent="transmission"
-tweak="unity-tweak-tool"
-uget="uget"
-unity="unity-tweak-tool"
-vagrant="vagrant"
-virtualbox="open-vm-tools-desktop"
+ALLAPPS="android-tools-adb android-tools-fastboot chromium-browser docker elinks filezilla gimp git coreutils inkscape libappindicator1 libindicator7 evolution national-geographic-wallpaper neofetch npm playonlinux putty shutter steam synaptic terminator tor transmission ubuntu-cleaner unity-tweak-tool uget vagrant virtualbox open-vm-tools-desktop"
 # ----------------------------------
 # function to display menus
 # ----------------------------------
@@ -87,13 +56,12 @@ software_list() {
 	echo "|-----------------------------------------------------------------"	
 	echo "|  Essential Tools to install post installing Ubuntu              " 
 	echo "|-----------------------------------------------------------------"
-	echo "|                                                                 "
 	echo "|	001.Android Device Manager                                      " 
 	echo "|	002.Chromium                                                    "
 	echo "|	003.Filezilla                                                   "
 	echo "|	004.Gimp                                                        "
 	echo "|	005.Git                                                         "
-	echo "|	006.GNU Coreutils                                                         "
+	echo "|	006.GNU Coreutils                                               "
 	echo "|	007.Inkscape                                                    "
 	echo "|	008.Putty                                                       "
 	echo "| 009.Shutter                                                     "
@@ -105,109 +73,23 @@ software_list() {
 	echo "|	015.Unity Tweak Tool                                            "
 	echo "| 016.Visual Studio Code                                          "
 	echo "| 017.Virtual Box                                                 "
-	echo "|                                                                 "
-	echo "|  type the "#" to learn more about each item                     "  
-#	echo "|  or type "i" and the "#" to install individual apps             " 
 	echo "|  press "m" to go back to the main menu                          "
 	echo "| ----------------------------------------------------------------"
 	sl_options
-}
-# ----------------------------------
-#  SOFTWARE LIST MENU OPTIONS
-# ----------------------------------
-SL1(){
-	echo "software list option selected"
-	software_list
-}
-SL2(){
-	echo "software list option selected"
-	software_list
-}
-SL3(){
-	echo "software list option selected"
-	software_list
-}
-SL4(){
-	echo "software list option selected"
-	software_list
-}
-SL5(){
-	echo "software list option selected"
-	software_list
-}
-SL6(){
-	echo "software list option selected"
-	software_list
-}
-SL7(){
-	echo "software list option selected"
-	software_list
-}
-SL8(){
-	echo "software list option selected"
-	software_list
-}
-SL9(){
-	apt-cache search neofetch
-	software_list
-}
-SL10(){
-	echo "software list option selected"
-	software_list
-}
-SL11(){
-	echo "software list option selected"
-	software_list
-}
-SL12(){
-	echo "software list option selected"
-	software_list
-}
-SL13(){
-	echo "software list option selected"
-	software_list
-}
-SL14(){
-	echo "software list option selected"
-	software_list
-}
-SL15(){
-	echo "software list option selected"
-	software_list
-}
-SL16(){
-	vs_code
-	software_list
-}
-SL17(){
-	echo "software list option selected"
-	software_list
-}
-SL18(){
-	echo "software list option selected"
-	software_list
-}
-SL19(){
-	echo "software list option selected"
-	software_list
-}
-SL20(){
-	echo "software list option selected"
-	software_list
 }
 # ----------------------------------
 #  UNATTENDED INSTALLER FUNCTION
 # ----------------------------------
 uinstaller(){
 	echo "Installer started"
-	#echo "Downloading Dependancies"
-	#$INSTALL $ALLPPA
-	#echo "All Dependancies installed"
+	echo "Downloading Dependancies"
+	sudo apt-add-repository ${ALLPPA[*]}
+	echo "All Dependancies installed"
 	echo "Updating system now"
 	$UPDATE
-	read -t 3 -p  "Update complete"
-	echo -t 3 -p  "Installing all packages"
-	$INSTALL $ALLAPPS
+	echo "Update complete"
+	echo "Installing all packages"
+	sudo apt-get install ${ALLAPPS[*]}
         pause
 }
 
@@ -231,8 +113,7 @@ one(){
 	read -p "Are you sure you want to run the unattended installer?[y/n]" input
 	case $input in
 	[yY][eE][sS]|[yY])
-		$INSTALL$ALLAPPS	
-#uinstaller
+		uinstaller
 		;; 
 	[nN][oO]|[nN])
 		backtomain
@@ -247,7 +128,7 @@ done
 }
 ## Option two Update PPA List ()
 two(){
-	echo "two() called"
+	sudo apt-add-repository ${ALLPPA[*]}
         pause
 }
 ## Option three Check Software List()
@@ -301,8 +182,6 @@ sl_options(){
 		018) SL18 ;;
 		019) SL19 ;;
 		020) SL20 ;;
-	[iI]) 
-		eval $INSTALL;;
 	[mM])
 		show_menus
        		;;
