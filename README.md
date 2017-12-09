@@ -72,3 +72,7 @@ Feel free to pull this repo and add your own software as functions for your own 
 more features will be added as time allows. 
 
 
+From:     Tedley Meralus 
+web:      www.tedleymeralus.com 
+Twitter:  @TechGameTeddy 
+Contact:  tmeralus@gmail.com
