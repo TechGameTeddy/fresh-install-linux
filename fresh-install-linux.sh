@@ -1,4 +1,4 @@
-https://github.com/TechGameTeddy/fresh-install-linux.git#!/bin/bash 
+#!/bin/bash 
 # Name: Fresh Install
 # Author: Tedley Meralus 
 # Contact: @TechGameTeddy
@@ -17,8 +17,7 @@ ALLPPA="ppa:dawidd0811/neofetch ppa:vlijm/spaceview ppa:gerardpuig/ppa ppa:shutt
 SEARCH="apt-cache search "
 SHOW="apt-cache showpkg "
 #UPDATE="apt-get udpate"
-PPADIR="/etc/apt/sources.list/"
-PPADIR2="/etc/apt/sources.list.d/"
+PPADIR="/etc/apt/sources.list.d/"
 
 # Variables to install all available ppa's 
 nvidia="ppa:graphics-drivers/ppa" #Nvidia ppa 
@@ -47,34 +46,59 @@ show_menus() {
 	echo "|1. Run unattended installer                             "
 	echo "|2. Install Dependancies                                 "
 	echo "|3. Check Software List                                  "
-	echo "|5. Exit                                                 " 
+	echo "|4. Exit                                                 " 
 	echo "|--------------------------------------------------------"
 }
 software_list() {
 	write_header " Package List "
 	clear
-	echo "|-----------------------------------------------------------------"	
-	echo "|  Essential Tools to install post installing Ubuntu              " 
-	echo "|-----------------------------------------------------------------"
-	echo "|	001.Android Device Manager                                      " 
-	echo "|	002.Chromium                                                    "
-	echo "|	003.Filezilla                                                   "
-	echo "|	004.Gimp                                                        "
-	echo "|	005.Git                                                         "
-	echo "|	006.GNU Coreutils                                               "
-	echo "|	007.Inkscape                                                    "
-	echo "|	008.Putty                                                       "
-	echo "| 009.Shutter                                                     "
-	echo "|	010.Steam                                                       "  
-	echo "|	011.Synaptic Package Manager                                    "
-	echo "|	012.Tor                                                         "
-	echo "|	013.Transmission                                                "
-	echo "|	014.Ubuntu System Cleaner                                       "
-	echo "|	015.Unity Tweak Tool                                            "
-	echo "| 016.Visual Studio Code                                          "
-	echo "| 017.Virtual Box                                                 "
-	echo "|  press "m" to go back to the main menu                          "
-	echo "| ----------------------------------------------------------------"
+	echo "|---------------------------------------------------"	
+	echo "|  Essential Tools to install post installing Ubuntu" 
+	echo "|---------------------------------------------------"
+	echo "|	Android Device Manager" 
+	echo "|	Chromium"
+	echo "|	Filezilla"
+	echo "|	docker" 
+	echo "|	links" 
+	echo "|	coreutils"  
+	echo "|	vagrant" 
+	echo "|	libappindicator1" 
+	echo "|	libindicator7"
+	echo "| evolution"
+	echo "|	national-geographic-wallpaper" 
+	echo "|	neofetch" 
+	echo "|	npm" 
+	echo "|	playonlinux" 
+	echo "|	putty" 
+	echo "|	shutter" 
+	echo "|	steam" 
+	echo "|	synaptic" 
+	echo "|	terminator" 
+	echo "|	tor" 
+	echo "|	transmission" 
+	echo "|	ubuntu-cleaner" 
+	echo "|	unity-tweak-tool" 
+	echo "|	uget" 
+	echo "|	vagrant" 
+	echo "|	virtualbox"
+	echo "|	open-vm-tools-desktop"            
+	echo "|	Gimp"
+	echo "|	Git"
+	echo "|	GNU Coreutils"
+	echo "|	Inkscape"
+	echo "|	Putty"
+	echo "| Shutter"
+	echo "|	Steam"  
+	echo "|	Synaptic Package Manager"
+	echo "|	Tor"
+	echo "|	Transmission"
+	echo "|	Ubuntu System Cleaner"
+	echo "|	Unity Tweak Tool"
+	echo "| Visual Studio Code"
+	echo "| Virtual Box"
+	echo "|  "
+	echo "|  press "m" to go back to the main menu" 
+	echo "|---------------------------------------------------"
 	sl_options
 }
 # ----------------------------------
@@ -92,7 +116,16 @@ uinstaller(){
 	sudo apt-get install ${ALLAPPS[*]}
         pause
 }
-
+#
+# ----------------------------------
+#  PPA Check
+# ----------------------------------
+checkppa(){
+if [ $PPADIR eq=1 ]; then 
+echo "shoulder shrug" 
+fi
+}
+#
 # ----------------------------------
 #  Return functions
 # ----------------------------------
@@ -120,7 +153,7 @@ one(){
        		break;;
     *)
 	echo "Invalid input..."
-	echo "Please type (y)Yes or (n)No" 
+#	echo "Please (y)Yes or (n)No 
 	;;
 esac
 done
@@ -165,23 +198,6 @@ sl_options(){
 		001) SL1  ;;
 		002) SL2  ;;
 		003) SL3  ;;
-		004) SL4  ;;
-		005) SL5  ;;
-		006) SL6  ;;
-		007) SL7  ;;
-		008) SL8  ;;
-		009) SL9  ;;
-		010) SL10 ;;
-		011) SL11 ;;
-		012) SL12 ;;
-		013) SL13 ;;
-		014) SL14 ;;
-		015) SL15 ;;
-		016) SL16 ;;
-		017) SL17 ;;
-		018) SL18 ;;
-		019) SL19 ;;
-		020) SL20 ;;
 	[mM])
 		show_menus
        		;;
@@ -205,22 +221,3 @@ do
 	read_options
 	date_and_time
 done
-
-# ----------------------------------
-#  Visual Studio Code installer
-# ----------------------------------
-#vs_code(){
-#	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-# 	mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-# 	sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" #> /etc/apt/sources.list.d/vscode.list'
-#	read "You must run apt-get update to complete"
-#	read "Would you like to do that now?[y/n}" input
-#	case $input in
-#	[yY][eE][sS]|[yY])
-#		$UPDATE
-#		$INSTALL$vscode
-#		;; 
-#	[nN][oO]|[nN])
-#		softwarelist
-#       		break;;
-#}
