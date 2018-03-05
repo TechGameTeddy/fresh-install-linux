@@ -4,16 +4,15 @@ The fresh install script is intended to be an automated tool to
 install a list of essential software used for any Debian Linux based 
 daily driver pc's (use of apt package manager). 
 
+Inspired by OMG UBUNTU's Things to do after installing Ubuntu XX.XX (https://www.omgubuntu.co.uk/2017/10/things-to-do-after-installing-ubuntu-17-10)
 
-Here is a list of the current software installed when you run the unattended 
-installer. 
 ====================================================================================================
 
 Chromium – Open-source web browser (differences)   
 
 code - Code Editing. Redefined. 
 
-VLC – Versatile media player
+VLC – VLC media player
 
 Steam – Game distribution platform
 
@@ -67,12 +66,6 @@ transmission - Lightweight BitTorrent client
 
 List was inspired by the day my hard drive crashed and OMGUbuntu's  "Top things to do after installing Ubuntu xx.xx" 
 
-Feel free to pull this repo and add your own software as functions for your own personal list. 
+Feel free to change the code and add your own software as functions for your own personal list. 
 
 more features will be added as time allows. 
-
-
-From:     Tedley Meralus 
-web:      www.tedleymeralus.com 
-Twitter:  @TechGameTeddy 
-Contact:  tmeralus@gmail.com
