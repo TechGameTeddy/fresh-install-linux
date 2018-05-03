@@ -23,218 +23,202 @@ PPADIR2="/etc/apt/sources.list.d/"
 show_menus() {
 	clear
 	date
-	echo "|--------------------------------------------------------"
-	echo "|--------------------------------------------------------"
-	echo "|         FRESH INSTALL                                  "
-	echo "|--------------------------------------------------------"
-	echo "| Essential tools/utilities to install 		       "
-	echo "| after installing or crashing your version of Ubuntu    "
-	echo "| created By @TechGameTeddy                              "
-	echo "|                                                        "
-	echo "|1. Run Fresh Install                                    "
-	echo "|2. Run Backup Utility                                   "
-	echo "|3. Check Software List(s)                               "
-	echo "|4. Exit                                                 "
-	echo "|--------------------------------------------------------"
+	echo "|-----------------------------------------------------------------|"
+	echo "|-----------------------------------------------------------------|"
+	echo "|         FRESH INSTALL                                           |"
+	echo "|-----------------------------------------------------------------|"
+	echo "| Essential tools/utilities to install 	                          |"
+	echo "| after installing or crashing your version of Ubuntu             |"
+	echo "| created By @TechGameTeddy                                       |"
+	echo "|                                                                 |"
+	echo "|1. Run Fresh Install Utility                                     |"
+	echo "|2. Run Backup Utility                                            |"
+	echo "|3. Check Software List(s)                                        |"
+	echo "|4. Something                                                     |"
+	echo "|5. Exit                                                          |"
+	echo "|-----------------------------------------------------------------|"
 }
-software_backup() {
+fresh_install_menu() {
+	write_header " Fresh Install utility "
+	clear
+	echo "|-----------------------------------------------------------------|"
+	echo "|  Essential Tools to install post installing Ubuntu              |"
+	echo "|-----------------------------------------------------------------|"
+	echo "|       The Fresh Installer will do the following                 |"
+	echo "|                                                                 |"
+	echo "|         Add ppa's to /etc/apt/sources.list.d                    |"
+	echo "|         Install pacakges from chosen list(s)                    |"
+	echo "|         install snaps from snaps list                           |"
+	echo "|                                                                 |"
+	echo "|   1.Install EVERYTHING                                          |"
+	echo "|   2.Install Developer Tools Only                                |"
+	echo "|   3.Install Sysadmin Tools Only                                 |"
+	echo "|   4.Install Desktop Tools Only                                  |"
+	echo "|   5.go back to Main Menu                                        |"
+	echo "|-----------------------------------------------------------------|"
+	echo "| ----------------------------------------------------------------|"
+	fresh_install_list
+}
+bk_package_list() {
 	write_header " Backup utility "
 	clear
 	date
-	echo "|--------------------------------------------------------"
-	echo "|--------------------------------------------------------"
-	echo "|         Backup Utility                                 "
-	echo "|--------------------------------------------------------"
-	echo "| Essential tools/utilities to install 	               "
-	echo "| after installing or crashing your version of Ubuntu    "
-	echo "| created By @TechGameTeddy                              "
-	echo "|                                                        "
-	echo "|1. list  pacakges                                       "
-	echo "|2. list  snaps                                          " 
-	echo "|3. check sources.d list                                 "
-	echo "|4. Install software list(s)                             "
-	echo "|5. add to software list                                 "
-	echo "|6. Exit                                                 "
-	echo "|--------------------------------------------------------"
-}
-fresh_install() {
-	write_header " Fresh Install utility "
-	clear
-	echo "|-----------------------------------------------------------------"
-	echo "|  Essential Tools to install post installing Ubuntu              "
-	echo "|-----------------------------------------------------------------"
-	echo "|1. list  pacakges                                                "
-	echo "|2. list  snaps                                                   "
-	echo "|3. check sources.d list                                          "
-	echo "|5. add to software list                                          "
-	echo "|4. Install software list(s)                                      "
-	echo "|4. Run Full Install                                              "
-	echo "|6. Back to Main                                                  "
-	echo "|-----------------------------------------------------------------"
-	echo "| ----------------------------------------------------------------"
-	sl_options
+	echo "|-----------------------------------------------------------------|"
+	echo "|-----------------------------------------------------------------|"
+	echo "|         Backup Utility                                          |"
+	echo "|-----------------------------------------------------------------|"
+	echo "| Backup Utility is used for backing up current list              |"
+	echo "| of installed packages, ppa's, and sources                       |"
+	echo "| on a working Ubuntu System                                      |"
+	echo "| using rsync                                                     |"
+	echo "|                                                                 |"
+	echo "|        The Utility will back the following                      |"
+	echo "|        to the backup folder in this current dir                 |"
+	echo "|                                                                 |"
+	echo "|          *Backup currently installed pacakges                   |"
+	echo "|          *Backup snap packages                                  |" 
+	echo "|          *Backup PPA sources                                    |"
+	echo "|                                                                 |"
+	echo "|1. Run Backup Now                                                |"
+	echo "|2. Check Backup Dir against OS                                   |"
+	echo "|3. Save current system specs                                     |"
+	echo "|4. Check Backup Dir against OS                                   |"
+	echo "|5. Back To Main Menu                                             |"
+	echo "|-----------------------------------------------------------------|"
+	backup_list
 }
 sl_lists() {
 	write_header " Software Lists "
 	clear
-	echo "|-----------------------------------------------------------------"
-	echo "|                       Software Lists                            "
-	echo "|-----------------------------------------------------------------"
-	echo "|1. Desktop List                                                  "
-	echo "|2. Developer List                                                "
-	echo "|3. Sysadmin List                                                 "
-	echo "|4. Create New List                                               "
-	echo "|5. Check Backup Lists                                            "
-	echo "|6. Back to Main                                                  "
-	echo "|-----------------------------------------------------------------"
-	echo "| ----------------------------------------------------------------"
-	sl_options
+	echo "|-----------------------------------------------------------------|"
+	echo "|             Software Lists                                      |"
+	echo "|-----------------------------------------------------------------|"
+	echo "| Each list is a set of suggested packages for daily users,       |"
+	echo "| developers, or admins.                                          |"
+	echo "|                                                                 |"
+	echo "| Fork this repo and create your own list for safe keeping        |"
+	echo "|                                                                 |"
+	echo "|                                                                 |"
+	echo "|1. Check Desktop List                                            |"
+	echo "|2. Check Developer List                                          |"
+	echo "|3. Check Sysadmin List                                           |"
+	echo "|4. Create New List                                               |"
+	echo "|5. Back to Main                                                  |"
+	echo "|-----------------------------------------------------------------|"
+	echo "| ----------------------------------------------------------------|"
+	sl_option_list
 }
----------------------------------
 #  Main Menu Option
-# ----------------------------------
+# Option one for Fresh install 
 one(){
-        pause
+        fresh_install_menu
 }
-## Option two Update PPA List ()
+## Option two for backup utility
 two(){
-
+        bk_package_list
 }
 ## Option three Check Software List()
 three(){
-	#software_list
-        #pause
+        sl_lists
 }
 ## Option four Exit ()
 four(){
-	#clear
+	numbertest
+}
+five(){
+	clear
 	exit
 }
----------------------------------
-#  Backup Utility Options SB1 
-# ----------------------------------
-SB1(){
-        pause
-}
-## Option two Update PPA List ()
-SB2(){
-
-}
-## Option three Check Software List()
-SB3(){
-	#software_list
-        #pause
-}
-## Option four Exit ()
-SB4(){
-	#clear
-	exit
-}
-SB5(){
-	#clear
-	exit
-}
-SB6(){
-	#clear
-	exit
-}
----------------------------------
-#  Fresh Install Utility Options FI1
-# ----------------------------------
+# FRESH INSTALL UTILITY
+#
+#  Options FI1 List packages to be installed
 FI1(){
-        pause
+        numbertest
 }
-## Option two Update PPA List ()
+## Options FI2 List snap packages to be installed 
 FI2(){
-
+        numbertest
 }
-## Option three Check Software List()
+## Options FI3  Check PPA sources List
 FI3(){
-	#software_list
-        #pause
+        numbertest
 }
-## Option four Exit ()
+## Options FI4  
 FI4(){
 	#clear
-	exit
+	numbertest
 }
+## Options FI5 back to main menu  
 FI5(){
-	#clear
-	exit
+	clear
+	backtomain
 }
-FI6(){
-	#clear
-	exit
+#
+# BACKUP UTILITY 
+#
+#  Option One to run backup now 
+BK1(){
+        numbertest
 }
-
----------------------------------
-#  Software List Utility Options SOL1
-# ----------------------------------
-SOL1(){
+## Check Backup Dir against OS
+BK2(){
+        numbertest
+}
+## Option three back to main menu
+BK3(){
+	numbertest
+}
+## Option three back to main menu
+BK4(){
+	numbertest
+}
+## Option three back to main menu
+BK5(){
+	clear
+	backtomain
+}
+#
+# SOFTWARE LIST 
+#
+#  Options SOL1 to read Desktop package List
+SF1(){
         pause
 }
-## Option two Update PPA List ()
-SOL2(){
-
+## Options SOL2 to read Developer package List
+SF2(){
+        pause
 }
-## Option three Check Software List()
-SOL3(){
-	#software_list
-        #pause
+## Options SOL3 to read Sysadmin package List
+SF3(){
+        pause
 }
-## Option four Exit ()
-SOL4(){
+## Options SOL4 to create a new list 
+SF4(){
 	#clear
 	exit
 }
-SOL5(){
-	#clear
-	exit
+## Options SOL4 to check backup list 
+SF5(){
+	clear
+	backtomain
 }
-SOL6(){
-	#clear
-	exit
-}
-
-
-# ----------------------------------
 #  MAIN MENU
-# ----------------------------------
 read_options(){
 	local choice
-	read -p "Enter your choice [ 1 - 4] " choice
+	read -p "Enter your choice [ 1 - 5] " choice
 	case $choice in
 		1) one    ;;
 		2) two    ;;
 		3) three  ;;
 		4) four   ;;
+		5) five   ;;
 		*) echo -e "${RED}Error...${STD}" && sleep 1
 	esac
 }
-# ----------------------------------
-#  SOFTWARE LIST MENU
-# ----------------------------------
-software_backup_list(){
-	local sblchoice
-	read -p "Enter choice [ 001 - 006] " sblchoice
-	case $sblchoice in
-		1) SB1  ;;
-		2) SB2  ;;
-		3) SB3  ;;
-		4) SB4  ;;
-		5) SB5  ;;
-	[qQ])
-		show_menus
-       		;;
-		*) echo -e "${RED}Invalid option choose [ 1 - 6] or "q" to quit...${STD}" && sleep 2
-       		clear
-		software_list
-		       ;;
-esac
-}
+
 fresh_install_list(){
 	local filchoice
-	read -p "Enter choice [ 001 - 006] " filchoice
+	read -p "Enter choice [ 1 - 5] " filchoice
 	case $filchoice in
 		1) FI1  ;;
 		2) FI2  ;;
@@ -244,7 +228,26 @@ fresh_install_list(){
 	[qQ])
 		show_menus
        		;;
-		*) echo -e "${RED}Invalid option choose [ 1 - 6] or "q" to quit...${STD}" && sleep 2
+		*) echo -e "${RED}Invalid option choose [ 1 - 5] or "q" to quit...${STD}" && sleep 2
+       		clear
+		software_list
+		       ;;
+esac
+}
+#  BACKUP UTILITY MENU
+backup_list(){
+	local sblchoice
+	read -p "Enter choice [ 1 - 5] " sblchoice
+	case $sblchoice in
+		1) BK1  ;;
+		2) BK2  ;;
+		3) BK3  ;;
+		3) BK4  ;;
+		3) BK5  ;;
+	[qQ])
+		show_menus
+       		;;
+		*) echo -e "${RED}Invalid option choose [ 1 - 5] or "q" to quit...${STD}" && sleep 2
        		clear
 		software_list
 		       ;;
@@ -252,17 +255,17 @@ esac
 }
 sl_option_list(){
 	local solchoice
-	read -p "Enter choice [ 001 - 006] " solchoice
+	read -p "Enter choice [ 1 - 5] " solchoice
 	case $solchoice in
-		1) SOL1  ;;
-		2) SOL2  ;;
-		3) SOL3  ;;
-		4) SOL4  ;;
-		5) SOL5  ;;
+		1) SF1  ;;
+		2) SF2  ;;
+		3) SF3  ;;
+		4) SF4  ;;
+		5) SF5  ;;
 	[qQ])
 		show_menus
        		;;
-		*) echo -e "${RED}Invalid option choose [ 1 - 6] or "q" to quit...${STD}" && sleep 2
+		*) echo -e "${RED}Invalid option choose [ 1 - 5] or "q" to quit...${STD}" && sleep 2
        		clear
 		software_list
 		       ;;
@@ -273,6 +276,13 @@ esac
 # ----------------------------------
 pause(){
   read -p "Press [Enter] key to continue..." fackEnterKey
+}
+# ----------------------------------
+#  Return functions
+# ----------------------------------
+numbertest(){
+  read -p "no function used right now..." 
+  backtomain
 }
 # ----------------------------------
 #back to main menu
