@@ -1,2 +1,0 @@
-https://askubuntu.com/questions/252734/apt-get-mass-install-packages-from-a-file
-https://www.cyberciti.biz/tips/linux-get-list-installed-software-reinstallation-restore.html

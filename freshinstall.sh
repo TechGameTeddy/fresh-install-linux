@@ -14,7 +14,7 @@ INSTALL="sudo apt-get install "
 ADDPPA="sudo add-apt-repository "
 SEARCH="apt-cache search "
 SHOW="apt-cache showpkg "
-UPDATE="apt-get udpate"
+UPDATE="sudo apt-get udpate"
 PPADIR="/etc/apt/sources.list/"
 PPADIR2="/etc/apt/sources.list.d/"
 # ----------------------------------
@@ -34,7 +34,7 @@ show_menus() {
 	echo "|1. Run Fresh Install Utility                                     |"
 	echo "|2. Run Backup Utility                                            |"
 	echo "|3. Check Software List(s)                                        |"
-	echo "|4. Something                                                     |"
+	echo "|4. Check Sysyem Specs with Neofetch                              |"
 	echo "|5. Exit                                                          |"
 	echo "|-----------------------------------------------------------------|"
 }
@@ -76,16 +76,16 @@ bk_package_list() {
 	echo "|        to the backup folder in this current dir                 |"
 	echo "|                                                                 |"
 	echo "|          *Backup currently installed pacakges                   |"
-	echo "|          *Backup snap packages                                  |" 
+	echo "|          *Backup snap packages                                  |"
 	echo "|          *Backup PPA sources                                    |"
 	echo "|                                                                 |"
 	echo "|1. Run Backup Now                                                |"
 	echo "|2. Check Backup Dir against OS                                   |"
-	echo "|3. Save current system specs                                     |"
+	echo "|3. Save current system info                                      |"
 	echo "|4. Check Backup Dir against OS                                   |"
 	echo "|5. Back To Main Menu                                             |"
 	echo "|-----------------------------------------------------------------|"
-	backup_list
+	backup_lists
 }
 sl_lists() {
 	write_header " Software Lists "
@@ -102,14 +102,14 @@ sl_lists() {
 	echo "|1. Check Desktop List                                            |"
 	echo "|2. Check Developer List                                          |"
 	echo "|3. Check Sysadmin List                                           |"
-	echo "|4. Create New List                                               |"
+	echo "|4. Add to a List                                                 |"
 	echo "|5. Back to Main                                                  |"
 	echo "|-----------------------------------------------------------------|"
 	echo "| ----------------------------------------------------------------|"
 	sl_option_list
 }
 #  Main Menu Option
-# Option one for Fresh install 
+# Option one for Fresh install
 one(){
         fresh_install_menu
 }
@@ -123,7 +123,7 @@ three(){
 }
 ## Option four Exit ()
 four(){
-	numbertest
+	neofetch
 }
 five(){
 	clear
@@ -133,30 +133,47 @@ five(){
 #
 #  Options FI1 List packages to be installed
 FI1(){
-        numbertest
+	if [ -f $all-tools ]; then
+	   echo "File $FILE exists."
+		 ppa_developer
+		 ppa_syadmin
+		 ppa_desktop
+		 $UPDATE
+		 fresh_merge
+		else
+		  echo "File $FILE was created"
+		 ppa_developer
+ 		 ppa_syadmin
+ 		 ppa_desktop
+ 		 $UPDATE
+ 		 fresh_merge
+		fi
 }
-## Options FI2 List snap packages to be installed 
+## Options FI2 List snap packages to be installed
 FI2(){
-        numbertest
+	ppa_developer
+	cat developer-tools | xargs sudo apt-get install -y
 }
 ## Options FI3  Check PPA sources List
 FI3(){
-        numbertest
+	ppa_syadmin
+	cat sysadmin-tools | xargs sudo apt-get install -y
 }
-## Options FI4  
+## Options FI4
 FI4(){
 	#clear
-	numbertest
+	ppa_desktop
+	cat desktop-tools | xargs sudo apt-get install -y
 }
-## Options FI5 back to main menu  
+## Options FI5 back to main menu
 FI5(){
 	clear
 	backtomain
 }
 #
-# BACKUP UTILITY 
+# BACKUP UTILITY
 #
-#  Option One to run backup now 
+#  Option One to run backup now
 BK1(){
         numbertest
 }
@@ -178,29 +195,77 @@ BK5(){
 	backtomain
 }
 #
-# SOFTWARE LIST 
-#
+# SOFTWARE LIST
 #  Options SOL1 to read Desktop package List
 SF1(){
-        pause
+        cat desktop-tools
 }
 ## Options SOL2 to read Developer package List
 SF2(){
-        pause
+        cat developer-tools
 }
 ## Options SOL3 to read Sysadmin package List
 SF3(){
-        pause
+        cat sysadmin-tools
 }
-## Options SOL4 to create a new list 
+## Options SOL4 to add to a new list
 SF4(){
-	#clear
-	exit
+	numbertest
 }
-## Options SOL4 to check backup list 
+## Options SOL5 to go back to main menu
 SF5(){
 	clear
 	backtomain
+}
+fresh_merge(){
+	if [ -f all-tools ]; then
+	   echo "all-tools file exists."
+			cat desktop-tools >> all-tools
+			cat developer-tools >> all-tools
+			cat sysadmin-tools >> all-tools
+			cat all-tools | xargs sudo apt-get install -y
+		else
+		  echo "all-tools file was created"
+			touch all-tools
+			cat desktop-tools >> all-tools
+			cat developer-tools >> all-tools
+			cat sysadmin-tools >> all-tools
+			cat all-tools | xargs sudo apt-get install -y
+		fi
+}
+ppa_developer(){
+	echo "Adding Developer PPAs"
+	sudo add-apt-repository ppa:webupd8team/atom
+	sudo add-apt-repository ppa:vlijm/spaceview
+	echo "updating repositories"
+	$UPDATE
+}
+ppa_syadmin(){
+	echo "Adding Admin PPAs"
+	sudo add-apt-repository ppa:webupd8team/atom
+	sudo add-apt-repository ppa:vlijm/spaceview
+	echo "updating repositories"
+	$UPDATE
+}
+ppa_desktop(){
+	echo "Adding Desktop PPAs"
+	sudo add-apt-repository ppa:webupd8team/atom
+	sudo add-apt-repository ppa:vlijm/spaceview
+	echo "updating repositories"
+	$UPDATE
+}
+# Gather and read System information
+neofetch(){
+if dpkg -s neofetch then
+	neofetch
+else
+	cd neofetch
+	make install
+	$UPDATE
+	cd ..
+	neofetch
+	pause
+fi
 }
 #  MAIN MENU
 read_options(){
@@ -215,7 +280,6 @@ read_options(){
 		*) echo -e "${RED}Error...${STD}" && sleep 1
 	esac
 }
-
 fresh_install_list(){
 	local filchoice
 	read -p "Enter choice [ 1 - 5] " filchoice
@@ -281,7 +345,7 @@ pause(){
 #  Return functions
 # ----------------------------------
 numbertest(){
-  read -p "no function used right now..." 
+  read -p "no function used right now..."
   backtomain
 }
 # ----------------------------------
@@ -304,5 +368,3 @@ do
 	read_options
 	date_and_time
 done
-
-
