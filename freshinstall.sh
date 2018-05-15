@@ -15,6 +15,7 @@ ADDPPA="sudo add-apt-repository "
 SEARCH="apt-cache search "
 SHOW="apt-cache showpkg "
 UPDATE="sudo apt-get udpate"
+BKDIR="pwd"
 PPADIR="/etc/apt/sources.list/"
 PPADIR2="/etc/apt/sources.list.d/"
 # ----------------------------------
@@ -33,13 +34,14 @@ show_menus() {
 	echo "|                                                                 |"
 	echo "|1. Run Fresh Install Utility                                     |"
 	echo "|2. Run Backup Utility                                            |"
-	echo "|3. Check Software List(s)                                        |"
-	echo "|4. Check Sysyem Specs                                            |"
-	echo "|5. Exit                                                          |"
+	echo "|3. Check Systyem Specs                                           |"
+	echo "|4. Check Systyem with Neofetch                                   |"
+	echo "|                                                                 |"
+	echo "| Type 'e' to exit                                                |"
+	echo "|                                                                 |"
 	echo "|-----------------------------------------------------------------|"
 }
-fresh_install_menu() {
-	write_header " Fresh Install utility "
+fresh_install_menu(){
 	clear
 	echo "|-----------------------------------------------------------------|"
 	echo "|  Essential Tools to install post installing Ubuntu              |"
@@ -47,22 +49,21 @@ fresh_install_menu() {
 	echo "|       The Fresh Installer will do the following                 |"
 	echo "|                                                                 |"
 	echo "|         Add ppa's to /etc/apt/sources.list.d                    |"
-	echo "|         Install pacakges from chosen list(s)                    |"
+	echo "|         Install OMG Ubuntu suggested packages                   |"
 	echo "|         install snaps from snaps list                           |"
 	echo "|                                                                 |"
-	echo "|   1.Install EVERYTHING                                          |"
-	echo "|   2.Install Developer Tools Only                                |"
-	echo "|   3.Install Sysadmin Tools Only                                 |"
-	echo "|   4.Install Desktop Tools Only                                  |"
-	echo "|   5.go back to Main Menu                                        |"
+	echo "|   1.Run OMG Ubuntu suggested Installer                          |"
+	echo "|   2.Restore Backup                                              |"
+	echo "|                                                                 |"
+	echo "| Type 'm' to go back to main menu                                |"
+	echo "|                                                                 |"
 	echo "|-----------------------------------------------------------------|"
 	echo "| ----------------------------------------------------------------|"
 	fresh_install_list
 }
 bk_package_list() {
-	write_header " Backup utility "
 	clear
-	date
+	time
 	echo "|-----------------------------------------------------------------|"
 	echo "|-----------------------------------------------------------------|"
 	echo "|         Backup Utility                                          |"
@@ -79,34 +80,15 @@ bk_package_list() {
 	echo "|          *Backup snap packages                                  |"
 	echo "|          *Backup PPA sources                                    |"
 	echo "|                                                                 |"
-	echo "|1. Run Backup Now                                                |"
-	echo "|2. Check Backup Dir against OS                                   |"
-	echo "|3. Save current system info                                      |"
+	echo "|1. Run Full Backup Now                                           |"
+	echo "|2. Check Snap Packages                                           |"
+	echo "|3. Create Backup CronJob                                         |"
 	echo "|4. Check Backup Dir against OS                                   |"
-	echo "|5. Back To Main Menu                                             |"
+	echo "|                                                                 |"
+	echo "| Type 'm' to go back to main menu                                |"
+	echo "|                                                                 |"
 	echo "|-----------------------------------------------------------------|"
 	backup_lists
-}
-sl_lists() {
-	write_header " Software Lists "
-	clear
-	echo "|-----------------------------------------------------------------|"
-	echo "|             Software Lists                                      |"
-	echo "|-----------------------------------------------------------------|"
-	echo "| Each list is a set of suggested packages for daily users,       |"
-	echo "| developers, or admins.                                          |"
-	echo "|                                                                 |"
-	echo "| Fork this repo and create your own list for safe keeping        |"
-	echo "|                                                                 |"
-	echo "|                                                                 |"
-	echo "|1. Check Desktop List                                            |"
-	echo "|2. Check Developer List                                          |"
-	echo "|3. Check Sysadmin List                                           |"
-	echo "|4. Add to a List                                                 |"
-	echo "|5. Back to Main                                                  |"
-	echo "|-----------------------------------------------------------------|"
-	echo "| ----------------------------------------------------------------|"
-	sl_option_list
 }
 #  Main Menu Option
 # Option one for Fresh install
@@ -115,171 +97,81 @@ one(){
 }
 ## Option two for backup utility
 two(){
-        bk_package_list
+				bk_package_list
 }
 ## Option three Check Software List()
 three(){
-        sl_lists
+        sysinfo_script.sh
 }
-## Option four Exit ()
 four(){
-	neofetch
-}
-five(){
-	clear
-	exit
+        neo_install
 }
 # FRESH INSTALL UTILITY
-#
 #  Options FI1 List packages to be installed
 FI1(){
-	if [ -f $all-tools ]; then
-	   echo "File $FILE exists."
-		 ppa_developer
-		 ppa_syadmin
-		 ppa_desktop
-		 $UPDATE
-		 fresh_merge
-		else
-		  echo "File $FILE was created"
-		 ppa_developer
- 		 ppa_syadmin
- 		 ppa_desktop
- 		 $UPDATE
- 		 fresh_merge
-		fi
+	cat omgubuntulist.txt
+	pause
+	#cat omgubuntulist.txt | xargs sudo apt-get install -y
 }
-## Options FI2 List snap packages to be installed
 FI2(){
-	ppa_developer
-	cat developer-tools | xargs sudo apt-get install -y
-}
-## Options FI3  Check PPA sources List
-FI3(){
-	ppa_syadmin
-	cat sysadmin-tools | xargs sudo apt-get install -y
-}
-## Options FI4
-FI4(){
-	#clear
-	ppa_desktop
-	cat desktop-tools | xargs sudo apt-get install -y
-}
-## Options FI5 back to main menu
-FI5(){
 	clear
 	backtomain
+	## Options FI2 List snap packages tomkdir /tmp/FIbackup/sources/
+	# restore backup list 
 }
-#
 # BACKUP UTILITY
-#
 #  Option One to run backup now
 BK1(){
-        numbertest
+		dpkg --list >> {$BKDIR}/packagelist.txt
+		echo "backed up package list"
+ 	  mkdir /tmp/FIbackup/sources/
+		cp /etc/apt/sources.list.d/* {$BKDIR}/sources/sourcelist.txt
+
+		pause
 }
 ## Check Backup Dir against OS
 BK2(){
         numbertest
+				#check snap packages
 }
 ## Option three back to main menu
 BK3(){
-	numbertest
+  			numbertest
+				#create backup cron job
 }
 ## Option three back to main menu
 BK4(){
 	numbertest
+	#use diff -u to check packages
 }
-## Option three back to main menu
-BK5(){
-	clear
-	backtomain
-}
-#
-# SOFTWARE LIST
-#  Options SOL1 to read Desktop package List
-SF1(){
-        cat desktop-tools
-}
-## Options SOL2 to read Developer package List
-SF2(){
-        cat developer-tools
-}
-## Options SOL3 to read Sysadmin package List
-SF3(){
-        cat sysadmin-tools
-}
-## Options SOL4 to add to a new list
-SF4(){
-	numbertest
-}
-## Options SOL5 to go back to main menu
-SF5(){
-	clear
-	backtomain
-}
-fresh_merge(){
-	if [ -f all-tools ]; then
-	   echo "all-tools file exists."
-			cat desktop-tools >> all-tools
-			cat developer-tools >> all-tools
-			cat sysadmin-tools >> all-tools
-			cat all-tools | xargs sudo apt-get install -y
-		else
-		  echo "all-tools file was created"
-			touch all-tools
-			cat desktop-tools >> all-tools
-			cat developer-tools >> all-tools
-			cat sysadmin-tools >> all-tools
-			cat all-tools | xargs sudo apt-get install -y
-		fi
-}
-ppa_developer(){
-	echo "Adding Developer PPAs"
-	sudo add-apt-repository ppa:webupd8team/atom
-	sudo add-apt-repository ppa:vlijm/spaceview
-	echo "updating repositories"
-	$UPDATE
-}
-ppa_syadmin(){
-	echo "Adding Admin PPAs"
-	sudo add-apt-repository ppa:webupd8team/atom
-	sudo add-apt-repository ppa:vlijm/spaceview
-	echo "updating repositories"
-	$UPDATE
-}
-ppa_desktop(){
-	echo "Adding Desktop PPAs"
-	sudo add-apt-repository ppa:webupd8team/atom
-	sudo add-apt-repository ppa:vlijm/spaceview
-	echo "updating repositories"
-	$UPDATE
+neo_install(){
+cd neo/
+sudo make install
+cd ..
+neofetch
+pause
 }
 #  MAIN MENU
 read_options(){
 	local choice
-	read -p "Enter your choice [ 1 - 5] " choice
+	read -p "Enter your choice [ 1 - 4] " choice
 	case $choice in
 		1) one    ;;
 		2) two    ;;
 		3) three  ;;
-		4) four   ;;
-		5) five   ;;
-		*) echo -e "${RED}Error...${STD}" && sleep 1
+		4) four  ;;
+		[eE])	exit_script ;;
+		*) echo -e "${RED}Invalid option choose [ 1 - 4] or "q" to quit...${STD}" && sleep 2
 	esac
 }
 fresh_install_list(){
 	local filchoice
-	read -p "Enter choice [ 1 - 5] " filchoice
+	read -p "Enter choice [ 1 - 2] " filchoice
 	case $filchoice in
 		1) FI1  ;;
 		2) FI2  ;;
-		3) FI3  ;;
-		4) FI4  ;;
-		5) FI5  ;;
-	[qQ])
-		show_menus
-       		;;
-		*) echo -e "${RED}Invalid option choose [ 1 - 5] or "q" to quit...${STD}" && sleep 2
+		[mM])	show_menus ;;
+		*) echo -e "${RED}Invalid option choose [ 1 - 2] or "e" to quit...${STD}" && sleep 2
        		clear
 		software_list
 		       ;;
@@ -288,35 +180,14 @@ esac
 #  BACKUP UTILITY MENU
 backup_list(){
 	local sblchoice
-	read -p "Enter choice [ 1 - 5] " sblchoice
+	read -p "Enter choice [ 1 - 4] " sblchoice
 	case $sblchoice in
 		1) BK1  ;;
 		2) BK2  ;;
 		3) BK3  ;;
-		3) BK4  ;;
-		3) BK5  ;;
-	[qQ])
-		show_menus
-       		;;
-		*) echo -e "${RED}Invalid option choose [ 1 - 5] or "q" to quit...${STD}" && sleep 2
-       		clear
-		software_list
-		       ;;
-esac
-}
-sl_option_list(){
-	local solchoice
-	read -p "Enter choice [ 1 - 5] " solchoice
-	case $solchoice in
-		1) SF1  ;;
-		2) SF2  ;;
-		3) SF3  ;;
-		4) SF4  ;;
-		5) SF5  ;;
-	[qQ])
-		show_menus
-       		;;
-		*) echo -e "${RED}Invalid option choose [ 1 - 5] or "q" to quit...${STD}" && sleep 2
+		4) BK4  ;;
+		[mM])	show_menus ;;
+		*) echo -e "${RED}Invalid option choose [ 1 - 4] or "e" to quit...${STD}" && sleep 2
        		clear
 		software_list
 		       ;;
@@ -334,6 +205,13 @@ pause(){
 numbertest(){
   read -p "no function used right now..."
   backtomain
+}
+# ----------------------------------
+# Exit Script
+# ----------------------------------
+exit_script(){
+	clear
+	exit
 }
 # ----------------------------------
 #back to main menu
