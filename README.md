@@ -9,14 +9,14 @@ A menu driven script to backup and restore files from an Ubuntu   desktop
 
 ## Screenshots ##
 
-##Main Menu##
+Main Menu
 
 ![screenshot](https://github.com/tmeralus/fresh-install-linux/blob/master/img/main-menu.png)
 
-##Software List##
+Software List
 
-![screenshot](https://github.com/tmeralus/fresh-install-linux/blob/master/img/software-list.png)
+![screenshot](https://github.com/tmeralus/fresh-install-linux/blob/master/img/software-check-list.png)
 
-##Automated Fresh Install List##
+Automated Fresh Install List
 
 ![screenshot](https://github.com/tmeralus/fresh-install-linux/blob/master/img/fresh-install-menu.png)
