@@ -1,4 +1,6 @@
 # Neofetch
+# WRITTEN AND DEVELOPED BY dylanaraps [https://github.com/dylanaraps/neofetch]
+# SOURCE[https://github.com/dylanaraps/neofetch]
 
 <a href="https://repology.org/metapackage/neofetch">
     <img src="https://repology.org/badge/vertical-allrepos/neofetch.svg" alt="Packaging status" align="right" height="400px">
