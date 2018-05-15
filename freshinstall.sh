@@ -34,7 +34,7 @@ show_menus() {
 	echo "|1. Run Fresh Install Utility                                     |"
 	echo "|2. Run Backup Utility                                            |"
 	echo "|3. Check Software List(s)                                        |"
-	echo "|4. Check Sysyem Specs with Neofetch                              |"
+	echo "|4. Check Sysyem Specs                                            |"
 	echo "|5. Exit                                                          |"
 	echo "|-----------------------------------------------------------------|"
 }
@@ -253,19 +253,6 @@ ppa_desktop(){
 	sudo add-apt-repository ppa:vlijm/spaceview
 	echo "updating repositories"
 	$UPDATE
-}
-# Gather and read System information
-neofetch(){
-if dpkg -s neofetch then
-	neofetch
-else
-	cd neofetch
-	make install
-	$UPDATE
-	cd ..
-	neofetch
-	pause
-fi
 }
 #  MAIN MENU
 read_options(){
