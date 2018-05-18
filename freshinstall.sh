@@ -1,3 +1,4 @@
+#!/bin/bash
 # Name: Fresh Install
 # Author: Tedley Meralus
 # Contact: @TechGameTeddy
@@ -271,7 +272,7 @@ backtomain(){
   show_menus
 }
 # Trap CTRL+C, CTRL+Z and quit singles
-trap '' SIGINT SIGQUIT SIGTSTP
+trap 'Where you going? Press e to exit' SIGINT SIGQUIT SIGTSTP
 # ----------------------------------
 # Main Menu logic - infinite loop
 # ----------------------------------
