@@ -32,33 +32,14 @@ show_menus() {
 	echo "| created By @TechGameTeddy                            |"
 	echo "|                                                      |"
 	echo "|1. Run Fresh Install Utility                          |"
-	echo "|2. Run Backup Utility                                 |"
-	echo "|3. Check Systyem with Neofetch                        |"
+	echo "|2. Go to Backup Menu                                  |"
+	echo "|3. Restore Backup                                     |"
+	echo "|4. Check System with Neofetch                         |"
 	echo "|                                                      |"
 	echo "| Type 'e' to exit                                     |"
-	echo "| Type 'p' to push to github                           |"
+	#echo "| Type 'p' to push to github                          |"
 	echo "|                                                      |"
 	echo "|------------------------------------------------------|"
-}
-fresh_install_menu(){
-	clear
-	echo "|------------------------------------------------------|"
-	echo "|  Essential Tools to install post installing Ubuntu   |"
-	echo "|------------------------------------------------------|"
-	echo "|       The Fresh Installer will do the following      |"
-	echo "|                                                      |"
-	echo "|         Add ppa's to /etc/apt/sources.list.d         |"
-	echo "|         Install OMG Ubuntu suggested packages        |"
-	echo "|                                                      |"
-	echo "|   1.Run Fresh-Installer                              |"
-	echo "|   2.Run OMG Ubuntu suggested Installer               |"
-	echo "|   3.Restore Backup                                   |"
-	echo "|                                                      |"
-	echo "| Type 'm' to go back to main menu                     |"
-	echo "|                                                      |"
-	echo "|------------------------------------------------------|"
-	echo "| -----------------------------------------------------|"
-	fresh_install_list
 }
 bk_package_list() {
 	clear
@@ -89,58 +70,37 @@ bk_package_list() {
 	echo "|-------------------------------------------------------|"
 	backup_lists
 }
-#  Main Menu Option
-# Option one for Fresh install
+# Main Menu Option / Option one for Fresh install
 one(){
-  fresh_install_menu
+echo "STARTING RESTORE" && sleep 1
+echo "Adding PPA Sources" && sleep 1
+cp {$BKDIR}/sources/* /etc/apt/sources.list.d/
+echo "Installing Snapd" && sleep 1
+sudo apt-get -y install snap
+echo "Moving snaps to Snap folder" && sleep 1
+cp {$BKDIR}/backup/snaps/* /var/snap/
+echo "Snaps moved successfully to snap folder"
+echo "Running Update" && sleep 1
+$UPDATE
+echo "Update Complete" && sleep 1
+echo "Installing backup package" && sleep 1
+cat /backup/backuplist | xargs sudo apt-get install -y
+echo "package list installed" && sleep 1
+echo "Fresh Install Completed" && sleep 3
+pause
 }
 ## Option two for backup utility
 two(){
-	bk_package_list
+  bk_package_list
 }
-## Option three Check Software List()
+## Option three Restore Backup List
 three(){
+  numbertest
+}
+## Option four Install and run Neofetch
+four(){
   neo_install
 }
-# FRESH INSTALL UTILITY
-#  INSTALL BACKED UP INSTALLER PACKAGES
-FI1(){
-  echo "Installing packagse from package list" && sleep 1
-	cat freshpackagelist | xargs sudo apt-get install -y
-	echo "package list installed" && sleep 1
-	pause
-	#cat omgubuntulist.txt | xargs sudo apt-get install -y
-}
-# INSTALL OMG UBUNTU LISTED APPS
-FI2(){
-	echo "Installing packagse from OMG Ubuntu's List" && sleep 1
-	cat omgubuntulist.txt | xargs sudo apt-get install -y
-	echo "suggested OMG Ubuntu apps installed" && sleep 1
-	pause
-	## Options FI2 List snap packages tomkdir /tmp/FIbackup/sources/
-	# restore backup list
-}
-# RESTORE BACKUP
-FI3(){
-	echo "STARTING RESTORE" && sleep 1
-	echo "Adding PPA Sources" && sleep 1
-  cp {$BKDIR}/sources/* /etc/apt/sources.list.d/
-	echo "Running Update" && sleep 1
-	$UPDATE
-	echo "Update Complete" && sleep 1
-	echo "Installing backup package" && sleep 1
-	cat /backup/backuplist | xargs sudo apt-get install -y
-	echo "package list installed" && sleep 1
-	echo "Installing Snapd" && sleep 1
-	sudo apt-get install snap
-	echo "Moving snaps to Snap folder" && sleep 1
-  cp {$BKDIR}/backup/snaps/* /var/snap/
-	echo "Snaps moved to snap folder"
-	pause
-	## Options FI2 List snap packages tomkdir /tmp/FIbackup/sources/
-	# restore backup list
-}
-# BACKUP UTILITY
 #  RUN FULL BACKUP NOW
 BK1(){
 	full_backup
@@ -212,29 +172,16 @@ pause
 #  MAIN MENU
 read_options(){
 	local choice
-	read -p "Enter your choice [ 1 - 3] " choice
+	read -p "Enter your choice [ 1 - 4] " choice
 	case $choice in
 		1) one    ;;
 		2) two    ;;
 		3) three  ;;
+		4) four   ;;
 		[eE])	exit_script ;;
-		[pP])	git_push ;;
-		*) echo -e "${RED}Invalid option choose [ 1 - 3] or "e" to exit...${STD}" && sleep 2
+#		[pP])	git_push ;;
+		*) echo -e "${RED}Invalid option choose [ 1 - 4] or "e" to exit...${STD}" && sleep 2
 	esac
-}
-fresh_install_list(){
-	local filchoice
-	read -p "Enter choice [ 1 - 2] " filchoice
-	case $filchoice in
-		1) FI1  ;;
-		2) FI2  ;;
-		2) FI3  ;;
-		[mM])	show_menus ;;
-		*) echo -e "${RED}Invalid option choose [ 1 - 2] or "m" to quit...${STD}" && sleep 2
-       		clear
-		software_list
-		       ;;
-esac
 }
 #  BACKUP UTILITY MENU
 backup_list(){
