@@ -6,15 +6,9 @@
 # add to your github channel for personal use
 # inspired by OMG Ubuntu's infamous
 # Top Things to do after Installing Ubuntu xx.xx articles
-# check them out at http://www.omgubuntu.co.uk/2017/04/things-to-do-after-installing-ubuntu-17-04
-#
 # Define Variables
-STARTOFSCRIPT='date'
-#ALLPPA="AllPPA"
-INSTALL="sudo apt-get install "
-SHOW="apt-cache showpkg "
-UPDATE="sudo apt-get udpate"
-BKDIR="pwd"
+UPDATE="sudo apt-get update"
+BKDIR=$(pwd)
 DATE="date"
 PPADIR="/etc/apt/sources.list.d/"
 # ----------------------------------
@@ -41,9 +35,9 @@ show_menus() {
 	echo "|                                                      |"
 	echo "|------------------------------------------------------|"
 }
-bk_package_list() {
+bk_package_list(){
 	clear
-	time
+	date
 	echo "|-------------------------------------------------------|"
 	echo "|-------------------------------------------------------|"
 	echo "|         Backup Utility                                |"
@@ -58,27 +52,29 @@ bk_package_list() {
 	echo "|                                                       |"
 	echo "|          *Backup currently installed pacakges         |"
 	echo "|          *Backup PPA sources                          |"
+	echo "|          *Backup Snap Packages                        |"
+	echo "|          *Backup Alias Shortcuts for $USER         |"
 	echo "|                                                       |"
 	echo "|1. Run Full Backup Now                                 |"
 	echo "|2. Backup PPA sources                                  |"
 	echo "|3. Backup Snaps                                        |"
-	echo "|4. Create Backup CronJob                               |"
+	echo "|4. Backup Alias Shortcuts                              |"
 	echo "|5. Check Backup Dir against OS                         |"
 	echo "|                                                       |"
 	echo "| Type 'm' to go back to main menu                      |"
 	echo "|                                                       |"
 	echo "|-------------------------------------------------------|"
-	backup_lists
+	backup_list
 }
 # Main Menu Option / Option one for Fresh install
 one(){
 echo "STARTING RESTORE" && sleep 1
 echo "Adding PPA Sources" && sleep 1
-cp {$BKDIR}/sources/* /etc/apt/sources.list.d/
+cp $BKDIR/sources/* /etc/apt/sources.list.d/
 echo "Installing Snapd" && sleep 1
 sudo apt-get -y install snap
 echo "Moving snaps to Snap folder" && sleep 1
-cp {$BKDIR}/backup/snaps/* /var/snap/
+cp $BKDIR/backup/snaps/* /var/snap/
 echo "Snaps moved successfully to snap folder"
 echo "Running Update" && sleep 1
 $UPDATE
@@ -91,7 +87,7 @@ pause
 }
 ## Option two for backup utility
 two(){
-  bk_package_list
+ bk_package_list
 }
 ## Option three Restore Backup List
 three(){
@@ -111,46 +107,51 @@ BK1(){
 ## BACKUP PPA SOURCES
 BK2(){
 	echo "Backing up PPA Sources" && sleep 1
-	cp /etc/apt/sources.list.d/* {$BKDIR}/backups/sources/
+	cp /etc/apt/sources.list.d/* $BKDIR/backups/sources/
 	echo "Backup Completed" && sleep 1
 	pause
 }
 ## BACKUP SNAPS
 BK3(){
   echo "Backing up Snap Packages" && sleep 1
-	cp /var/snap/* {$BKDIR}/backups/snaps/
+	cp -r /var/snap/* $BKDIR/backups/snaps/
 	echo "Backup Completed"
+	pause
 }
-## CHECK BACKUP CRON JOBS
+## Backup Alias for current user
 BK4(){
-	cp daily-cron /etc/cron.daily/
-	echo "Daily Cron scheduled everyday at midnight "  && sleep 1
-	echo "Edit /etc/cron.daily/daily-cron to send email alerts"  && sleep 1
-	echo "or edit cron to change time of backups"  && sleep 1
-	#create backup cron job
+alias >> $BKDIR/backups/alias_shortcuts
 }
-## CHECK BACKUP CRON JOBS
+## Check backup list with current pc package list
 BK5(){
-	dpkg -l | grep ^ii | awk '{print $2}' > {$BKDIR}/currentlist
-	diff -u {$BKDIR}/currentlist ~{$BKDIR}/packagelist
+	dpkg -l | grep ^ii | awk '{print $2}' > $BKDIR/currentlist
+	sort $BKDIR/currentlist $BKDIR/backups/backuplist | uniq -u > diff.txt
+	if [ -s diff.txt ]; then
+	echo "Certain pacakges from backup havent been installed" && sleep 2
+	echo "Run the insatller again until this file is empty" && sleep 2
+	echo "Current packages not installed from backup" && sleep 4
+	cat diff.txt
+  else
+	echo "Backup matches currenly installed Packages" && sleep 2
+	fi
+	pause
 }
 full_backup(){
 	echo "Starting Full backup"
-	if [ -d "{$BKDIR}/backups/" ]; then
-		echo "Folders already created"  && sleep 1
-		dpkg -l | grep ^ii | awk '{print $2}' > {$BKDIR}/backups/backuplist
-		echo "Backed up package list"   && sleep 1
-	elif [ -f "{$BKDIR}/backups/backuplist" ]; then
-		echo "Backuplist exists, creating new package list"
-		dpkg -l | grep ^ii | awk '{print $2}' > {$BKDIR}/backups/packagelist
-		pause
+	if [ -f "$BKDIR/backups/backuplist" ]; then
+		echo "BackupList already created"  && sleep 1
+		echo "Updating Backup List"  && sleep 1
+		dpkg -l | grep ^ii | awk '{print $2}' >> $BKDIR/backups/backuplist
 	else
-		echo "Backups not found"  && sleep 1
-		echo "Creating backup folder"  && sleep 1
-		mkdir {$BKDIR}/backups/
-		dpkg -l | grep ^ii | awk '{print $2}' > {$BKDIR}/backups/backuplist
-		echo "backed up package list"
+		dpkg -l | grep ^ii | awk '{print $2}' > $BKDIR/backups/backuplist
 	fi
+	echo "Backing up PPA Sources" && sleep 1
+	cp /etc/apt/sources.list.d/* $BKDIR/backups/sources/
+	echo "Backup Completed" && sleep 1
+	echo "Backing up Snap Packages" && sleep 1
+	cp -r /var/snap/* $BKDIR/backups/snaps/
+	echo "Backup Completed"
+	pause
 }
 neo_install(){
 cd neo/
@@ -192,11 +193,10 @@ backup_list(){
 		2) BK2  ;;
 		3) BK3  ;;
 		4) BK4  ;;
-		4) BK5  ;;
+		5) BK5  ;;
 		[mM])	show_menus ;;
 		*) echo -e "${RED}Invalid option choose [ 1 - 4] or "m" to quit...${STD}" && sleep 2
        		clear
-		software_list
 		       ;;
 esac
 }
