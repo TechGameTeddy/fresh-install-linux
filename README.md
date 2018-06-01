@@ -11,9 +11,9 @@ A menu driven script to backup and restore files from an Ubuntu desktop
  there are lists of different blogs and site that tell you the easiest way to upgrade is to
  run the following commands
 
- $ sudo apt update
- $ sudo apt upgrade
- $ sudo apt dist-upgrade
+ * $ sudo apt update
+ * $ sudo apt upgrade
+ * $ sudo apt dist-upgrade
 
  And everytime, without fail I would backup my data and try the dist-upgrade and fail.
  Unity would crash or Gnome wouldnt know what to do with new or updated gcc packages
@@ -24,7 +24,7 @@ A menu driven script to backup and restore files from an Ubuntu desktop
  text file, my curiousity, and trigger fingers.
 
  Enjoy!
- 
+
 ## Features ##
  * Backup Currently installed packages
  * Backup Snap Packages
