@@ -6,7 +6,12 @@
 # add to your github channel for personal use
 # inspired by OMG Ubuntu's infamous
 # Top Things to do after Installing Ubuntu xx.xx articles
-# Define Variables
+#s Check Sudo
+if (( $EUID != 0 )); then
+    echo "Please run as root"
+    exit
+fi
+# Defined Variables
 UPDATE="sudo apt-get update"
 BKDIR=$(pwd)
 DATE="date"
