@@ -330,7 +330,6 @@ gir1.2-webkit2-4.0:amd64
 gir1.2-wnck-3.0:amd64
 git
 git-man
-gitkraken
 gkbd-capplet
 gksu
 glances
@@ -2518,8 +2517,6 @@ wireless-tools
 wmctrl
 wodim
 wpasupplicant
-wps-office:i386
-wps-office-fonts
 x11-apps
 x11-common
 x11-session-utils

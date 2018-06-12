@@ -97,6 +97,17 @@ two(){
 ## Option three Restore Backup List
 three(){
   numbertest
+ #split backup list into segments of 100 
+ #add backup list to it own folder  
+ #split -n l/100 backuplist > /pgklist/pkgset
+ #for every file in pkglist folder 
+ # run install line
+ #sudo apt-get install $(cat ~/github/fresh-install-linux/backups/backuplist | awk '{print $1}')
+#OR
+#sudo apt-get install dselect
+#sudo dpkg --set-selections < backuplist.txt
+#sudo apt-get dselect-upgrade
+
 }
 ## Option four Install and run Neofetch
 four(){
