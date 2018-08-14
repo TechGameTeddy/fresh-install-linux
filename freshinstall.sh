@@ -36,7 +36,7 @@ show_menus() {
 	echo "|4. Check System with Neofetch                         |"
 	echo "|                                                      |"
 	echo "| Type 'e' to exit                                     |"
-	#echo "| Type 'p' to push to github                          |"
+	echo "| Type 'p' to push to github                           |"
 	echo "|                                                      |"
 	echo "|------------------------------------------------------|"
 }
@@ -97,10 +97,10 @@ two(){
 ## Option three Restore Backup List
 three(){
   numbertest
- #split backup list into segments of 100 
- #add backup list to it own folder  
+ #split backup list into segments of 100
+ #add backup list to it own folder
  #split -n l/100 backuplist > /pgklist/pkgset
- #for every file in pkglist folder 
+ #for every file in pkglist folder
  # run install line
  #sudo apt-get install $(cat ~/github/fresh-install-linux/backups/backuplist | awk '{print $1}')
 #OR
@@ -136,7 +136,7 @@ BK3(){
 }
 ## Backup Alias for current user
 BK4(){
-alias >> $BKDIR/backups/alias_shortcuts
+ cat ~/.bashrc > $BKDIR/backups/alias_shortcuts
 }
 ## Check backup list with current pc package list
 BK5(){
@@ -177,13 +177,16 @@ neofetch
 pause
 }
 git_push(){
-echo "PLEASE NOTE"  && sleep 2
-echo "THIS ONLY WORKS IF THIS PROJECT WAS FORKED"  && sleep 2
-git add *
-git add */*
-git commit -m "ran fresh install on $DATE"
-git push -u origin master
-echo "PLEASE RUN git pull to refresh"
+echo "PLEASE NOTE"  && sleep 1
+echo "THIS ONLY WORKS IF THIS PROJECT WAS FORKED"  && sleep 1
+echo "AND YOUR PUBLIC KEY IS ADDED TO GITHUB"  && sleep 1
+echo "STOP SCRIPT AND COMMENT OUT THE git_push FUNCTION"  && sleep 1
+echo " TO RUN PROPERLY"  && sleep 1
+#git add *
+#git add */*
+#git commit -m "ran fresh install on $DATE"
+#git push origin master
+#echo "PLEASE RUN git pull to refresh"
 pause
 }
 #  MAIN MENU
@@ -196,14 +199,14 @@ read_options(){
 		3) three  ;;
 		4) four   ;;
 		[eE])	exit_script ;;
-#		[pP])	git_push ;;
+		[pP])	git_push ;;
 		*) echo -e "${RED}Invalid option choose [ 1 - 4] or "e" to exit...${STD}" && sleep 2
 	esac
 }
 #  BACKUP UTILITY MENU
 backup_list(){
 	local sblchoice
-	read -p "Enter choice [ 1 - 4] " sblchoice
+	read -p "Enter choice [ 1 - 5] " sblchoice
 	case $sblchoice in
 		1) BK1  ;;
 		2) BK2  ;;
