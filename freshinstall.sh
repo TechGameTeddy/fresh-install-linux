@@ -61,10 +61,11 @@ bk_package_list(){
 	echo "|          *Backup Alias Shortcuts for $USER         |"
 	echo "|                                                       |"
 	echo "|1. Run Full Backup Now                                 |"
-	echo "|2. Backup PPA sources                                  |"
-	echo "|3. Backup Snaps                                        |"
-	echo "|4. Backup Alias Shortcuts                              |"
-	echo "|5. Check Backup Dir against OS                         |"
+	echo "|2. Backup Package List                                 |"
+	echo "|3. Backup PPA sources                                  |"
+	echo "|4. Backup Snaps                                        |"
+	echo "|5. Backup Alias Shortcuts                              |"
+	echo "|6. Check Backup Dir against OS                         |"
 	echo "|                                                       |"
 	echo "| Type 'm' to go back to main menu                      |"
 	echo "|                                                       |"
@@ -116,30 +117,35 @@ four(){
 #  RUN FULL BACKUP NOW
 BK1(){
 	full_backup
-	BK2
-	BK3
 	pause
 }
-## BACKUP PPA SOURCES
+## BACKUP PACKAGE LIST
 BK2(){
 	echo "Backing up PPA Sources" && sleep 1
 	cp /etc/apt/sources.list.d/* $BKDIR/backups/sources/
 	echo "Backup Completed" && sleep 1
 	pause
 }
-## BACKUP SNAPS
+## BACKUP PPA SOURCES
 BK3(){
+	echo "Backing up PPA Sources" && sleep 1
+	cp /etc/apt/sources.list.d/* $BKDIR/backups/sources/
+	echo "Backup Completed" && sleep 1
+	pause
+}
+## BACKUP SNAPS
+BK4(){
   echo "Backing up Snap Packages" && sleep 1
 	cp -r /var/snap/* $BKDIR/backups/snaps/
 	echo "Backup Completed"
 	pause
 }
 ## Backup Alias for current user
-BK4(){
+BK5(){
  cat ~/.bashrc > $BKDIR/backups/alias_shortcuts
 }
 ## Check backup list with current pc package list
-BK5(){
+BK6(){
 	dpkg -l | grep ^ii | awk '{print $2}' > $BKDIR/currentlist
 	sort $BKDIR/currentlist $BKDIR/backups/backuplist | uniq -u > diff.txt
 	if [ -s diff.txt ]; then
@@ -213,6 +219,7 @@ backup_list(){
 		3) BK3  ;;
 		4) BK4  ;;
 		5) BK5  ;;
+		6) BK6  ;;
 		[mM])	show_menus ;;
 		*) echo -e "${RED}Invalid option choose [ 1 - 4] or "m" to quit...${STD}" && sleep 2
        		clear
