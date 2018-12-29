@@ -31,7 +31,7 @@ show_menus() {
 	echo "| created By @TechGameTeddy                            |"
 	echo "|                                                      |"
 	echo "|1. Run Fresh Install Utility                          |"
-	echo "|2. Go to Backup Menu                                  |"
+	echo "|2. Backup Menu                                  |"
 	echo "|3. Restore Backup                                     |"
 	echo "|4. Check System with Neofetch                         |"
 	echo "|                                                      |"
